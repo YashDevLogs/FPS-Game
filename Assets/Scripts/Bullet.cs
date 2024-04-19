@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision ObjectWeHit)
     {
-        if (collision.gameObject.CompareTag("Target"))
+        if (ObjectWeHit.gameObject.CompareTag("Target"))
         {
-            print("hit" + collision.gameObject.name + "!");
-            CreateBulletImpactEffect(collision);
+            print("hit" + ObjectWeHit.gameObject.name + "!");
+            CreateBulletImpactEffect(ObjectWeHit);
             Destroy(gameObject);
         }
-        if (collision.gameObject.CompareTag("Wall"))
+        if (ObjectWeHit.gameObject.CompareTag("Wall"))
         {
             print("Hit a Wall!");
-            CreateBulletImpactEffect(collision);
+            CreateBulletImpactEffect(ObjectWeHit);
             Destroy(gameObject);
+        }
+
+        if (ObjectWeHit.gameObject.CompareTag("Destructable"))
+        {
+            print("Hit a Destructable!");
+            ObjectWeHit.gameObject.GetComponent<Destructables>().Destruct();
         }
     }
 
