@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -22,7 +23,13 @@ public class Weapon : MonoBehaviour
     public GameObject MuzzleEffect;
     public GameObject CartridgeEjectEffecst;
     private Animator animator;
-    
+
+    public float ReloadTime;
+    public int MagzineSize, BulletsLeft;
+    public bool IsReloading;
+
+
+
     public enum ShootingMode
     {
         Single,
@@ -37,11 +44,17 @@ public class Weapon : MonoBehaviour
         ReadyToShoot = true;
         BurstBulletsLeft = BulletsPerBurst;
         animator = GetComponent<Animator>();
+        BulletsLeft = MagzineSize;
     }
 
 
     void Update()
     {
+        if(BulletsLeft == 0 && IsShooting)
+        {
+            SoundManager.Instance.PistolEmptyMagzine.Play();
+        }
+
         if(CurrentShootingMode == ShootingMode.Auto) 
         {
             IsShooting = Input.GetKey(KeyCode.Mouse0);
@@ -51,11 +64,26 @@ public class Weapon : MonoBehaviour
             IsShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        if(ReadyToShoot && IsShooting)
+        if(Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading)
+        {
+            Reload();
+        }
+        if(ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft <= 0 )
+        {
+            Reload();
+        }
+
+
+        if(ReadyToShoot && IsShooting && BulletsLeft > 0 )
         {
             BurstBulletsLeft = BulletsPerBurst;
             FireWeapon();
 
+        }
+
+        if(AmmoManager.Instance.AmmoDisplay != null)
+        {
+            AmmoManager.Instance.AmmoDisplay.text = $"{BulletsLeft/BulletsPerBurst}/{MagzineSize/BulletsPerBurst}"; 
         }
     }
 
@@ -63,6 +91,7 @@ public class Weapon : MonoBehaviour
 
     private void FireWeapon()
     {
+        BulletsLeft--;
         MuzzleEffect.GetComponent<ParticleSystem>().Play();
         SoundManager.Instance.PistolShooting.Play();
         animator.SetTrigger("RECOIL");
@@ -93,6 +122,19 @@ public class Weapon : MonoBehaviour
         }
     }
 
+
+    private void Reload()
+    {
+        SoundManager.Instance.PistolReloading.Play();
+        IsReloading = true;
+        Invoke("ReloadComplete", ReloadTime);
+    }
+
+    private void ReloadComplete()
+    {
+        BulletsLeft = MagzineSize;
+        IsReloading = false;
+    }
     private void ResetShot()
     {
         ReadyToShoot = true;
