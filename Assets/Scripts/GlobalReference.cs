@@ -7,5 +7,4 @@ public class GlobalReference : GenericMonoSingleton<GlobalReference>
 
     public GameObject BulletImpactEffectPrefab;
 
-
 }

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
+    private Animator characterAnimator;
 
     public float Speed= 12f;
     public float gravity = -9.81f * 2;
@@ -23,11 +25,13 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         controller  = GetComponent<CharacterController>();
+        characterAnimator = GetComponent<Animator>();
     }
 
 
     void Update()
     {
+
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, groundMask);
 
         if(IsGrounded && velocity.y < 0)
@@ -39,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
+        
 
         controller.Move(move * Speed * Time.deltaTime);  
 
@@ -54,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(lastPosition != gameObject.transform.position && IsGrounded == true) 
         {
+            
             IsMoving = true;
         }
         else
@@ -63,4 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
         lastPosition = gameObject.transform.position;
     }
+
+    
 }

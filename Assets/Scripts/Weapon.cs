@@ -22,7 +22,8 @@ public class Weapon : MonoBehaviour
 
     public GameObject MuzzleEffect;
     public GameObject CartridgeEjectEffecst;
-    private Animator animator;
+    private Animator pistolAnimator;
+    [SerializeField] private Animator characterAnimator;
 
     public float ReloadTime;
     public int MagzineSize, BulletsLeft;
@@ -43,7 +44,7 @@ public class Weapon : MonoBehaviour
     {
         ReadyToShoot = true;
         BurstBulletsLeft = BulletsPerBurst;
-        animator = GetComponent<Animator>();
+        pistolAnimator = GetComponent<Animator>();
         BulletsLeft = MagzineSize;
     }
 
@@ -94,7 +95,8 @@ public class Weapon : MonoBehaviour
         BulletsLeft--;
         MuzzleEffect.GetComponent<ParticleSystem>().Play();
         SoundManager.Instance.PistolShooting.Play();
-        animator.SetTrigger("RECOIL");
+        pistolAnimator.SetTrigger("RECOIL");
+        characterAnimator.SetTrigger("IsShooting");   
         CartridgeEjectEffecst.GetComponent<ParticleSystem>().Play();
 
         ReadyToShoot = false;
