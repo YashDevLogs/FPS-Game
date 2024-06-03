@@ -24,6 +24,7 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
     public TextMeshProUGUI tacticalAmountUI;
 
     public Sprite emptySlot;
+    public GameObject middleAim;
 
     private void Update()
     {
@@ -33,7 +34,7 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
         if (activeWeapon)
         {
             magzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}";
-            totalAmmoUI.text = $"{activeWeapon.MagzineSize/ activeWeapon.BulletsPerBurst}";
+            totalAmmoUI.text = $"{WeaponManager.Instance.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
 
             Weapon.WeaponEnum model = activeWeapon.ThisWeaponModel;
             ammoTypeUI.sprite = GetAmmoSprite(model);

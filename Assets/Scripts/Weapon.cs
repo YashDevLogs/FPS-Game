@@ -6,30 +6,43 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Activ Weapon")]
     public bool isActiveWeapon;
 
+    [Header("ADS")]
+    public bool isADS;
+
+    [Header("Shooting")]
     public bool IsShooting, ReadyToShoot;
     bool AllowReset = true;
     public float ShootingDelay = 2f;
 
+    [Header("Burst")]
     public int BulletsPerBurst = 4;
     public int BurstBulletsLeft;
 
+    [Header("Spread Intensity")]
     public float SpreadIntensity;
+    public float hipSpreadIntensity;
+    public float adsSpreadIntensity;
 
+    [Header("Bullet")]
     public GameObject BulletPrefab;
     public Transform BulletSpawn;
     public float BulletVelocity = 30f ;
     public float BulletPrefabLifespan = 3f;
 
+    [Header("Effects")]
     public GameObject MuzzleEffect;
     public GameObject CartridgeEjectEffecst;
     internal Animator animator;
 
+    [Header("Reload")]
     public float ReloadTime;
     public int MagzineSize, BulletsLeft;
     public bool IsReloading;
 
+    [Header("Spawn Position")]
     public Vector3 SpawnPosition;
     public Vector3 SpawnRotation;
 
@@ -48,6 +61,8 @@ public class Weapon : MonoBehaviour
         BurstBulletsLeft = BulletsPerBurst;
         animator = GetComponent<Animator>();
         BulletsLeft = MagzineSize;
+
+        SpreadIntensity = hipSpreadIntensity;
     }
 
 
@@ -55,6 +70,19 @@ public class Weapon : MonoBehaviour
     {
         if (isActiveWeapon)
         {
+            if (Input.GetMouseButtonDown(1))
+            {
+                EnterADS();
+            }
+
+
+            if (Input.GetMouseButtonUp(1))
+            {
+               ExitADS();
+            }
+
+
+
             GetComponent<Outline>().enabled = false;
             if (BulletsLeft == 0 && IsShooting)
             {
@@ -70,11 +98,11 @@ public class Weapon : MonoBehaviour
                 IsShooting = Input.GetKeyDown(KeyCode.Mouse0);
             }
 
-            if (Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading)
+            if (Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading && WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > 0)
             {
                 Reload();
             }
-            if (ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft <= 0)
+            if (ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft == 0 && WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > 0)
             {
                 Reload();
             }
@@ -90,13 +118,39 @@ public class Weapon : MonoBehaviour
     }
 
 
+    private void EnterADS()
+    {
+        animator.SetTrigger("ADS_enter");
+        isADS = true;
+        /*HUDManager.Instance.middleAim.SetActive(false);*/
+        SpreadIntensity = adsSpreadIntensity;
+    }
+
+    private void ExitADS()
+    {
+        animator.SetTrigger("ADS_exit");
+        isADS = false;
+        /*HUDManager.Instance.middleAim.SetActive(true);*/
+    }
+
 
     private void FireWeapon()
     {
         BulletsLeft--;
         MuzzleEffect.GetComponent<ParticleSystem>().Play();
+
         SoundManager.Instance.PlayShootingSound(ThisWeaponModel);
-        animator.SetTrigger("RECOIL");
+
+        if (isADS)
+        {
+            animator.SetTrigger("RECOIL_ADS");
+        }
+        else
+        {
+            animator.SetTrigger("RECOIL");
+        }
+
+        
         CartridgeEjectEffecst.GetComponent<ParticleSystem>().Play();
 
         ReadyToShoot = false;
@@ -135,7 +189,19 @@ public class Weapon : MonoBehaviour
 
     private void ReloadComplete()
     {
-        BulletsLeft = MagzineSize;
+       if(WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > MagzineSize)
+        {
+            BulletsLeft = MagzineSize;
+            WeaponManager.Instance.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
+        }
+        else 
+        {
+                BulletsLeft = WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel);
+                WeaponManager.Instance.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);         
+        }
+
+
+
         IsReloading = false;
     }
     private void ResetShot()
@@ -161,10 +227,10 @@ public class Weapon : MonoBehaviour
 
         Vector3 direction = targetPoint - BulletSpawn.position;
 
-        float x = UnityEngine.Random.Range(-SpreadIntensity, SpreadIntensity);
+        float z = UnityEngine.Random.Range(-SpreadIntensity, SpreadIntensity);
         float y = UnityEngine.Random.Range(-SpreadIntensity, SpreadIntensity);
 
-        return direction + new Vector3(x, y, 0);
+        return direction + new Vector3(0, y, z);
     }
     private IEnumerator DestroyBulletAfterTime(GameObject bullet, float bulletPrefabLifespan)
     {

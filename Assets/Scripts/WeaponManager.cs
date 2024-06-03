@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using static Weapon;
 
 public class WeaponManager : GenericMonoSingleton<WeaponManager>
 {
 
     public List<GameObject> weaponSlots;
     public GameObject activeWeaponSlot;
+
+    public int totalPistolAmmo = 0;
+    public int totalRifleAmmo = 0;
 
     private void Start()
     {
@@ -90,8 +95,48 @@ public class WeaponManager : GenericMonoSingleton<WeaponManager>
         }
     }
 
-    internal void PickUpAmmoBox(GameObject gameObject)
+    internal void PickUpAmmoBox(AmmoBox ammo)
     {
-        print("Ammo Picked");
+        switch (ammo.ammoType)
+        {
+            case AmmoBox.AmmoType.PistolAmmo:
+                totalPistolAmmo += ammo.ammoAmount;
+                break;
+
+            case AmmoBox.AmmoType.RifleAmmo:
+                totalRifleAmmo += ammo.ammoAmount;
+                break;
+        }
+    }
+
+    internal void DecreaseTotalAmmo(int bulletsToDecrease, Weapon.WeaponEnum ThisWeaponModel)
+    {
+        switch(ThisWeaponModel)
+        {
+            case Weapon.WeaponEnum.Pistol:
+                totalPistolAmmo -= bulletsToDecrease;
+                break;
+
+            case Weapon.WeaponEnum.Ak47:
+                totalPistolAmmo -= bulletsToDecrease;
+                break;
+
+
+        }
+    }
+
+    public int CheckAmmoLeft(WeaponEnum thisWeaponModel)
+    {
+        switch (thisWeaponModel)
+        {
+            case WeaponEnum.Pistol:
+                return totalPistolAmmo;
+
+            case WeaponEnum.Ak47:
+                return totalRifleAmmo;
+
+            default:
+                return 0;
+        }
     }
 }

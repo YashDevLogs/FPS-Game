@@ -43,7 +43,8 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    WeaponManager.Instance.PickUpAmmoBox(objectHitByRayCast.gameObject);
+                    WeaponManager.Instance.PickUpAmmoBox(hoveredAmmoBox);
+                    Destroy(objectHitByRayCast.gameObject);
                 }
             }
             else
