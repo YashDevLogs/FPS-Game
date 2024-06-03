@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public bool isActiveWeapon;
+
     public bool IsShooting, ReadyToShoot;
     bool AllowReset = true;
     public float ShootingDelay = 2f;
@@ -22,14 +24,14 @@ public class Weapon : MonoBehaviour
 
     public GameObject MuzzleEffect;
     public GameObject CartridgeEjectEffecst;
-    private Animator pistolAnimator;
-    [SerializeField] private Animator characterAnimator;
+    internal Animator animator;
 
     public float ReloadTime;
     public int MagzineSize, BulletsLeft;
     public bool IsReloading;
 
-
+    public Vector3 SpawnPosition;
+    public Vector3 SpawnRotation;
 
     public enum ShootingMode
     {
@@ -44,47 +46,46 @@ public class Weapon : MonoBehaviour
     {
         ReadyToShoot = true;
         BurstBulletsLeft = BulletsPerBurst;
-        pistolAnimator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         BulletsLeft = MagzineSize;
     }
 
 
     void Update()
     {
-        if(BulletsLeft == 0 && IsShooting)
+        if (isActiveWeapon)
         {
-            SoundManager.Instance.PistolEmptyMagzine.Play();
-        }
+            GetComponent<Outline>().enabled = false;
+            if (BulletsLeft == 0 && IsShooting)
+            {
+                SoundManager.Instance.EmptyMagzine.Play();
+            }
 
-        if(CurrentShootingMode == ShootingMode.Auto) 
-        {
-            IsShooting = Input.GetKey(KeyCode.Mouse0);
-        }
-        else if(CurrentShootingMode == ShootingMode.Single || CurrentShootingMode == ShootingMode.Burst) 
-        {
-            IsShooting = Input.GetKeyDown(KeyCode.Mouse0);
-        }
+            if (CurrentShootingMode == ShootingMode.Auto)
+            {
+                IsShooting = Input.GetKey(KeyCode.Mouse0);
+            }
+            else if (CurrentShootingMode == ShootingMode.Single || CurrentShootingMode == ShootingMode.Burst)
+            {
+                IsShooting = Input.GetKeyDown(KeyCode.Mouse0);
+            }
 
-        if(Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading)
-        {
-            Reload();
-        }
-        if(ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft <= 0 )
-        {
-            Reload();
-        }
+            if (Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading)
+            {
+                Reload();
+            }
+            if (ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft <= 0)
+            {
+                Reload();
+            }
 
 
-        if(ReadyToShoot && IsShooting && BulletsLeft > 0 )
-        {
-            BurstBulletsLeft = BulletsPerBurst;
-            FireWeapon();
+            if (ReadyToShoot && IsShooting && BulletsLeft > 0)
+            {
+                BurstBulletsLeft = BulletsPerBurst;
+                FireWeapon();
 
-        }
-
-        if(AmmoManager.Instance.AmmoDisplay != null)
-        {
-            AmmoManager.Instance.AmmoDisplay.text = $"{BulletsLeft/BulletsPerBurst}/{MagzineSize/BulletsPerBurst}"; 
+            }
         }
     }
 
@@ -94,9 +95,8 @@ public class Weapon : MonoBehaviour
     {
         BulletsLeft--;
         MuzzleEffect.GetComponent<ParticleSystem>().Play();
-        SoundManager.Instance.PistolShooting.Play();
-        pistolAnimator.SetTrigger("RECOIL");
-        characterAnimator.SetTrigger("IsShooting");   
+        SoundManager.Instance.PlayShootingSound(ThisWeaponModel);
+        animator.SetTrigger("RECOIL");
         CartridgeEjectEffecst.GetComponent<ParticleSystem>().Play();
 
         ReadyToShoot = false;
@@ -127,8 +127,9 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
-        SoundManager.Instance.PistolReloading.Play();
+        SoundManager.Instance.PlayReloadSound(ThisWeaponModel);
         IsReloading = true;
+        animator.SetTrigger("IsReloading");
         Invoke("ReloadComplete", ReloadTime);
     }
 
@@ -170,4 +171,11 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(bulletPrefabLifespan);
         Destroy(bullet);
     }
+
+    public enum WeaponEnum
+    {
+        Pistol,
+        Ak47
+    }
+    public WeaponEnum ThisWeaponModel;
 }
