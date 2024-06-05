@@ -6,6 +6,7 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
 {
     public Weapon hoveredWeapon = null;
     public AmmoBox hoveredAmmoBox = null;
+    public Throwable hoveredThrowable = null;
 
     private void Update()
     {
@@ -38,7 +39,7 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
             //Ammo
             if (objectHitByRayCast.GetComponentInChildren<AmmoBox>())
             {
-                hoveredAmmoBox = objectHitByRayCast.gameObject.GetComponentInChildren<AmmoBox>();
+                hoveredAmmoBox = objectHitByRayCast.gameObject.GetComponent<AmmoBox>();
                 hoveredAmmoBox.GetComponentInChildren<Outline>().enabled = true;
 
                 if (Input.GetKeyDown(KeyCode.F))
@@ -52,6 +53,26 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
                 if (hoveredAmmoBox)
                 {
                     hoveredAmmoBox.GetComponent<Outline>().enabled = false;
+                }
+            }
+
+            // Throwables
+            if (objectHitByRayCast.GetComponentInChildren<Throwable>())
+            {
+                hoveredThrowable = objectHitByRayCast.gameObject.GetComponent<Throwable>();
+                hoveredThrowable.GetComponentInChildren<Outline>().enabled = true;
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    WeaponManager.Instance.PickUpThrowable(hoveredThrowable);
+                    Destroy(objectHitByRayCast.gameObject);
+                }
+            }
+            else
+            {
+                if (hoveredThrowable)
+                {
+                    hoveredThrowable.GetComponent<Outline>().enabled = false;
                 }
             }
 

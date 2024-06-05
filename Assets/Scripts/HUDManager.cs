@@ -97,4 +97,15 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
 
         }
     }
+
+    internal void UpdateThrowable(Throwable.ThrowableType throwable)
+    {
+        switch(throwable)
+        {
+            case Throwable.ThrowableType.Grenade:
+                lethalAmountUI.text = $"{WeaponManager.Instance.grenades}";
+                lethalUI.sprite = Resources.Load<GameObject>("Frag").GetComponent<SpriteRenderer>().sprite;
+                break;
+        }
+    }
 }
