@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Weapon;
 
-public class SoundManager : GenericMonoSingleton<SoundManager>
+public class SoundManager :MonoBehaviour
 {
     public AudioSource ShootingChannel;
 
@@ -15,6 +15,9 @@ public class SoundManager : GenericMonoSingleton<SoundManager>
     public AudioClip PistolShot;
 
     public AudioSource EmptyMagzine;
+
+    public AudioSource ThrowableChannel;
+    public AudioClip GrenadeBlast;
 
 
     public void PlayShootingSound(WeaponEnum weapon)

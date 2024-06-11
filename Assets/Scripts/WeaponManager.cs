@@ -5,7 +5,7 @@ using System.Diagnostics;
 using UnityEngine;
 using static Weapon;
 
-public class WeaponManager : GenericMonoSingleton<WeaponManager>
+public class WeaponManager : MonoBehaviour
 {
 
     public List<GameObject> weaponSlots;
@@ -30,7 +30,7 @@ public class WeaponManager : GenericMonoSingleton<WeaponManager>
         activeWeaponSlot = weaponSlots[0];
     }
 
-    private void Update()
+    public void Update()
     {
         foreach(GameObject weaponSlot in weaponSlots)
         {
@@ -194,7 +194,7 @@ public class WeaponManager : GenericMonoSingleton<WeaponManager>
     private void PickUpGrenade()
     {
         grenades += 1;
-        HUDManager.Instance.UpdateThrowable(Throwable.ThrowableType.Grenade);
+        GameManager.Instance.HUDManager.UpdateThrowable(Throwable.ThrowableType.Grenade);
 
 
     }
@@ -205,11 +205,11 @@ public class WeaponManager : GenericMonoSingleton<WeaponManager>
 
         GameObject throwable = Instantiate(lethalPrefab, throwableSpawn.transform.position, Camera.main.transform.rotation);
         Rigidbody rb = throwable.GetComponent<Rigidbody>();
-        rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse) ;
-        throwable.GetComponent<Throwable>().hasBeenThrown = true ;
+        rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
+        throwable.GetComponent<Throwable>().hasBeenThrown = true;
         grenades -= 1;
 
-        HUDManager.Instance.UpdateThrowable (Throwable.ThrowableType.Grenade);
+        GameManager.Instance.HUDManager.UpdateThrowable(Throwable.ThrowableType.Grenade);
 
     }
 

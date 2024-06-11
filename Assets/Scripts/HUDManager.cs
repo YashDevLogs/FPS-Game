@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using static Weapon;
 
 
-public class HUDManager : GenericMonoSingleton<HUDManager>
+public class HUDManager : MonoBehaviour
 {
     [Header("Ammo")]
     public TextMeshProUGUI magzineAmmoUI;
@@ -24,17 +24,18 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
     public TextMeshProUGUI tacticalAmountUI;
 
     public Sprite emptySlot;
+    public Sprite greySlot;
     public GameObject middleAim;
 
     private void Update()
     {
-        Weapon activeWeapon = WeaponManager.Instance.activeWeaponSlot.GetComponentInChildren<Weapon>();
+        Weapon activeWeapon = GameManager.Instance.WeaponManager.activeWeaponSlot.GetComponentInChildren<Weapon>();
         Weapon unActiveWeapon = GetUnActiveWeaponSlot().GetComponentInChildren<Weapon>();
 
         if (activeWeapon)
         {
             magzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}";
-            totalAmmoUI.text = $"{WeaponManager.Instance.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
+            totalAmmoUI.text = $"{GameManager.Instance.WeaponManager.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
 
             Weapon.WeaponEnum model = activeWeapon.ThisWeaponModel;
             ammoTypeUI.sprite = GetAmmoSprite(model);
@@ -57,13 +58,19 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
             activeWeaponUI.sprite = emptySlot;  
             unActiceWeaponUI.sprite= emptySlot;
         }
+
+        if(GameManager.Instance.WeaponManager.grenades <= 0)
+        {
+
+            lethalUI.sprite = greySlot;
+        }
     }
 
     private GameObject GetUnActiveWeaponSlot()
     {
-        foreach (GameObject weaponSlot in WeaponManager.Instance.weaponSlots)
+        foreach (GameObject weaponSlot in GameManager.Instance.WeaponManager.weaponSlots)
         {
-            if (weaponSlot != WeaponManager.Instance.activeWeaponSlot)
+            if (weaponSlot != GameManager.Instance.WeaponManager.activeWeaponSlot)
             {
                 return weaponSlot;
             }
@@ -103,7 +110,7 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
         switch(throwable)
         {
             case Throwable.ThrowableType.Grenade:
-                lethalAmountUI.text = $"{WeaponManager.Instance.grenades}";
+                lethalAmountUI.text = $"{GameManager.Instance.WeaponManager.grenades}";
                 lethalUI.sprite = Resources.Load<GameObject>("Frag").GetComponent<SpriteRenderer>().sprite;
                 break;
         }
