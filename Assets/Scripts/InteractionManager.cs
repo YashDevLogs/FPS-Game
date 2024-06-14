@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractionManager : MonoBehaviour
+public class InteractionManager : GenericMonoSingleton<InteractionManager>
 {
     public Weapon hoveredWeapon = null;
     public AmmoBox hoveredAmmoBox = null;
@@ -25,7 +25,7 @@ public class InteractionManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    GameManager.Instance.WeaponManager.PickUpWeapon(objectHitByRayCast.gameObject); 
+                    WeaponManager.Instance.PickUpWeapon(objectHitByRayCast.gameObject); 
                 }
             }
             else
@@ -44,7 +44,7 @@ public class InteractionManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    GameManager.Instance.WeaponManager.PickUpAmmoBox(hoveredAmmoBox);
+                    WeaponManager.Instance.PickUpAmmoBox(hoveredAmmoBox);
                     Destroy(objectHitByRayCast.gameObject);
                 }
             }
@@ -64,7 +64,7 @@ public class InteractionManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    GameManager.Instance.WeaponManager.PickUpThrowable(hoveredThrowable);
+                    WeaponManager.Instance.PickUpThrowable(hoveredThrowable);
                     Destroy(objectHitByRayCast.gameObject);
                 }
             }

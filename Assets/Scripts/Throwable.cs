@@ -58,16 +58,9 @@ public class Throwable : MonoBehaviour
 
     private void GrenadeEffect()
     {
-        // Visual Effects
-        GameObject explosionEffect = GameManager.Instance.GlobalReference.grenadeExplosionEffect;
+        GameObject explosionEffect = GlobalReference.Instance.grenadeExplosionEffect;
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
-
-        //Sound Effects
-        GameManager.Instance.SoundManager.ThrowableChannel.PlayOneShot(GameManager.Instance.SoundManager.GrenadeBlast);
-
-
-        // Physical Effects
         Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);
         foreach (Collider objectInRange in colliders)
         {

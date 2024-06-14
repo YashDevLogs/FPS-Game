@@ -5,7 +5,7 @@ using System.Diagnostics;
 using UnityEngine;
 using static Weapon;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponManager : GenericMonoSingleton<WeaponManager>
 {
 
     public List<GameObject> weaponSlots;
@@ -30,7 +30,7 @@ public class WeaponManager : MonoBehaviour
         activeWeaponSlot = weaponSlots[0];
     }
 
-    public void Update()
+    private void Update()
     {
         foreach(GameObject weaponSlot in weaponSlots)
         {
@@ -194,7 +194,7 @@ public class WeaponManager : MonoBehaviour
     private void PickUpGrenade()
     {
         grenades += 1;
-        GameManager.Instance.HUDManager.UpdateThrowable(Throwable.ThrowableType.Grenade);
+        HUDManager.Instance.UpdateThrowable(Throwable.ThrowableType.Grenade);
 
 
     }
@@ -205,11 +205,11 @@ public class WeaponManager : MonoBehaviour
 
         GameObject throwable = Instantiate(lethalPrefab, throwableSpawn.transform.position, Camera.main.transform.rotation);
         Rigidbody rb = throwable.GetComponent<Rigidbody>();
-        rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
-        throwable.GetComponent<Throwable>().hasBeenThrown = true;
+        rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse) ;
+        throwable.GetComponent<Throwable>().hasBeenThrown = true ;
         grenades -= 1;
 
-        GameManager.Instance.HUDManager.UpdateThrowable(Throwable.ThrowableType.Grenade);
+        HUDManager.Instance.UpdateThrowable (Throwable.ThrowableType.Grenade);
 
     }
 

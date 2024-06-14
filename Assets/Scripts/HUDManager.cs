@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using static Weapon;
 
 
-public class HUDManager : MonoBehaviour
+public class HUDManager : GenericMonoSingleton<HUDManager>
 {
     [Header("Ammo")]
     public TextMeshProUGUI magzineAmmoUI;
@@ -24,18 +24,17 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI tacticalAmountUI;
 
     public Sprite emptySlot;
-    public Sprite greySlot;
     public GameObject middleAim;
 
     private void Update()
     {
-        Weapon activeWeapon = GameManager.Instance.WeaponManager.activeWeaponSlot.GetComponentInChildren<Weapon>();
+        Weapon activeWeapon = WeaponManager.Instance.activeWeaponSlot.GetComponentInChildren<Weapon>();
         Weapon unActiveWeapon = GetUnActiveWeaponSlot().GetComponentInChildren<Weapon>();
 
         if (activeWeapon)
         {
             magzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}";
-            totalAmmoUI.text = $"{GameManager.Instance.WeaponManager.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
+            totalAmmoUI.text = $"{WeaponManager.Instance.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
 
             Weapon.WeaponEnum model = activeWeapon.ThisWeaponModel;
             ammoTypeUI.sprite = GetAmmoSprite(model);
@@ -58,19 +57,13 @@ public class HUDManager : MonoBehaviour
             activeWeaponUI.sprite = emptySlot;  
             unActiceWeaponUI.sprite= emptySlot;
         }
-
-        if(GameManager.Instance.WeaponManager.grenades <= 0)
-        {
-
-            lethalUI.sprite = greySlot;
-        }
     }
 
     private GameObject GetUnActiveWeaponSlot()
     {
-        foreach (GameObject weaponSlot in GameManager.Instance.WeaponManager.weaponSlots)
+        foreach (GameObject weaponSlot in WeaponManager.Instance.weaponSlots)
         {
-            if (weaponSlot != GameManager.Instance.WeaponManager.activeWeaponSlot)
+            if (weaponSlot != WeaponManager.Instance.activeWeaponSlot)
             {
                 return weaponSlot;
             }
@@ -110,7 +103,7 @@ public class HUDManager : MonoBehaviour
         switch(throwable)
         {
             case Throwable.ThrowableType.Grenade:
-                lethalAmountUI.text = $"{GameManager.Instance.WeaponManager.grenades}";
+                lethalAmountUI.text = $"{WeaponManager.Instance.grenades}";
                 lethalUI.sprite = Resources.Load<GameObject>("Frag").GetComponent<SpriteRenderer>().sprite;
                 break;
         }

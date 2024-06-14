@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class IconManager : MonoBehaviour
+public class IconManager : GenericMonoSingleton<IconManager> 
 {
     public static Sprite Pistol_Weapon;
     public static Sprite AK47_Weapon;

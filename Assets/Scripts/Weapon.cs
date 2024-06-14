@@ -68,12 +68,8 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        
-
         if (isActiveWeapon)
         {
-           
-
             if (Input.GetMouseButtonDown(1))
             {
                 EnterADS();
@@ -90,7 +86,7 @@ public class Weapon : MonoBehaviour
             GetComponent<Outline>().enabled = false;
             if (BulletsLeft == 0 && IsShooting)
             {
-                GameManager.Instance.SoundManager.EmptyMagzine.Play();
+                SoundManager.Instance.EmptyMagzine.Play();
             }
 
             if (CurrentShootingMode == ShootingMode.Auto)
@@ -102,11 +98,11 @@ public class Weapon : MonoBehaviour
                 IsShooting = Input.GetKeyDown(KeyCode.Mouse0);
             }
 
-            if (Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading && GameManager.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > 0)
+            if (Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading && WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > 0)
             {
                 Reload();
             }
-            if (ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft == 0 && GameManager.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > 0)
+            if (ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft == 0 && WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > 0)
             {
                 Reload();
             }
@@ -118,7 +114,6 @@ public class Weapon : MonoBehaviour
                 FireWeapon();
 
             }
-
         }
     }
 
@@ -144,7 +139,7 @@ public class Weapon : MonoBehaviour
         BulletsLeft--;
         MuzzleEffect.GetComponent<ParticleSystem>().Play();
 
-        GameManager.Instance.SoundManager.PlayShootingSound(ThisWeaponModel);
+        SoundManager.Instance.PlayShootingSound(ThisWeaponModel);
 
         if (isADS)
         {
@@ -186,7 +181,7 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
-        GameManager.Instance.SoundManager.PlayReloadSound(ThisWeaponModel);
+        SoundManager.Instance.PlayReloadSound(ThisWeaponModel);
         IsReloading = true;
         animator.SetTrigger("IsReloading");
         Invoke("ReloadComplete", ReloadTime);
@@ -194,15 +189,15 @@ public class Weapon : MonoBehaviour
 
     private void ReloadComplete()
     {
-       if(GameManager.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > MagzineSize)
+       if(WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > MagzineSize)
         {
             BulletsLeft = MagzineSize;
-            GameManager.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
+            WeaponManager.Instance.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
         }
         else 
         {
-                BulletsLeft = GameManager.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel);
-                GameManager.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);         
+                BulletsLeft = WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel);
+                WeaponManager.Instance.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);         
         }
 
 
