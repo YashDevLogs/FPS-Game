@@ -16,6 +16,10 @@ public class SoundManager : GenericMonoSingleton<SoundManager>
 
     public AudioSource EmptyMagzine;
 
+    public AudioSource ThrowableChannel;
+
+    public AudioClip GrenadeExplosion;
+
 
     public void PlayShootingSound(WeaponEnum weapon)
     {
