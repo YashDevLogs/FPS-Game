@@ -73,13 +73,15 @@ public class Weapon : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
+                Camera.main.fieldOfView = 40;
                 EnterADS();
             }
 
 
             if (Input.GetMouseButtonUp(1))
             {
-               ExitADS();
+                Camera.main.fieldOfView = 60;
+                ExitADS();
             }
 
 
