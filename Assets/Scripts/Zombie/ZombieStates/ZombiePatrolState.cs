@@ -46,7 +46,6 @@ public class ZombiePatrolState : StateMachineBehaviour
         timer = +Time.deltaTime;
         if(timer > PatrolTimer) 
         {
-            Debug.Log("Entering Idle state");
             animator.SetBool("isPatroling", false);
         }
 
@@ -55,7 +54,6 @@ public class ZombiePatrolState : StateMachineBehaviour
         float distanceFromPlayer = Vector3.Distance(player.position, animator.transform.position);
         if (distanceFromPlayer < DetectionArea)
         {
-            Debug.Log("Entering chasing state from PatrolState machine");
             animator.SetBool("isChasing", true);
         }
     }

@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
     }
 
-    internal void TakeDamage(float damageAmt)
+    public void TakeDamage(float damageAmt)
     {
         
        Health -= damageAmt;

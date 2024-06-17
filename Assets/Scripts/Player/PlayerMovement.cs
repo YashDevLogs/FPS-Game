@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
-    private Animator characterAnimator;
 
     public float Speed= 12f;
     public float gravity = -9.81f * 2;
@@ -25,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         controller  = GetComponent<CharacterController>();
-        characterAnimator = GetComponent<Animator>();
     }
 
 

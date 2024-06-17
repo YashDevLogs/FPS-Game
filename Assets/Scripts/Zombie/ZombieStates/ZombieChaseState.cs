@@ -38,7 +38,6 @@ public class ZombieChaseState : StateMachineBehaviour
 
         if (DistanceFromPlayer < AttackDistance) 
         {
-            Debug.Log("Entering Attack state");
             animator.SetBool("isAttacking", true);
         }
     }
