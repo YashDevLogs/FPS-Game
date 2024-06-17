@@ -15,6 +15,11 @@ public class ZombieChaseState : StateMachineBehaviour
     public float AttackDistance = 2.5f;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+       if(SoundManager.Instance.ZombieChannel.isPlaying == false)
+        {
+            SoundManager.Instance.ZombieChannel.PlayOneShot(SoundManager.Instance.ZombieChase);
+        }
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = ChaseSpeed;
@@ -46,5 +51,6 @@ public class ZombieChaseState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(animator.transform.position);
+        SoundManager.Instance.ZombieChannel.Stop();
     }
 }

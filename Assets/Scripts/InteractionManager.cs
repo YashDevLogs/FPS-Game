@@ -20,6 +20,12 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
             //Weapons
             if(objectHitByRayCast.GetComponent<Weapon>() && objectHitByRayCast.GetComponent<Weapon>().isActiveWeapon == false )
             {
+
+                if (hoveredWeapon)
+                {
+                    hoveredWeapon.GetComponent<Outline>().enabled = false;
+                }
+
                 hoveredWeapon = objectHitByRayCast.gameObject.GetComponent<Weapon>();
                 hoveredWeapon.GetComponent<Outline>().enabled = true;
 
@@ -39,6 +45,11 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
             //Ammo
             if (objectHitByRayCast.GetComponentInChildren<AmmoBox>())
             {
+                if (hoveredAmmoBox)
+                {
+                    hoveredAmmoBox.GetComponent<Outline>().enabled = false;
+                }
+
                 hoveredAmmoBox = objectHitByRayCast.gameObject.GetComponent<AmmoBox>();
                 hoveredAmmoBox.GetComponentInChildren<Outline>().enabled = true;
 
@@ -59,6 +70,11 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
             // Throwables
             if (objectHitByRayCast.GetComponentInChildren<Throwable>())
             {
+                if (hoveredThrowable)
+                {
+                    hoveredThrowable.GetComponent<Outline>().enabled = false;
+                }
+
                 hoveredThrowable = objectHitByRayCast.gameObject.GetComponent<Throwable>();
                 hoveredThrowable.GetComponentInChildren<Outline>().enabled = true;
 

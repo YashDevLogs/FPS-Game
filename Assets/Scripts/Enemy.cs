@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 {
     public float Health = 100f;
     private Animator ZombieAnim;
-    private bool isDead = false;
+    public bool isDead = false;
 
     private NavMeshAgent navAgent;
 
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
         if (Health <= 0)
         {
-            isDead = true;
+            
             int randomValue = Random.Range(0, 2);
 
             if (randomValue == 0)
@@ -37,11 +37,14 @@ public class Enemy : MonoBehaviour
             {
                 ZombieAnim.SetTrigger("DIE2");
             }
+            isDead = true;
+            SoundManager.Instance.ZombieChannel2.PlayOneShot(SoundManager.Instance.ZombieDeath);
         }
-        else if(!isDead)
+        else 
         {
             ZombieAnim.SetTrigger("DAMAGE");
-            
+            SoundManager.Instance.ZombieChannel2.PlayOneShot(SoundManager.Instance.ZombieHurt);
+
         }
     }
 

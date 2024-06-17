@@ -18,6 +18,12 @@ public class ZombiePatrolState : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if(SoundManager.Instance.ZombieChannel.isPlaying == false)
+        {
+            SoundManager.Instance.ZombieChannel.clip = SoundManager.Instance.ZombieWalking;
+            SoundManager.Instance.ZombieChannel.PlayDelayed(1f);
+        }
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = PatrolSpeed;
@@ -62,5 +68,6 @@ public class ZombiePatrolState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(agent.transform.position);
+        SoundManager.Instance.ZombieChannel.Stop();
     }
 }

@@ -5,21 +5,30 @@ using static Weapon;
 
 public class SoundManager : GenericMonoSingleton<SoundManager>
 {
+    [Header("Audio Source Channel")]
     public AudioSource ShootingChannel;
+    public AudioSource ThrowableChannel;
+    public AudioSource ZombieChannel;
+    public AudioSource ZombieChannel2;
 
-
+    [Header("Pistol Sound")]
     public AudioSource PistolReloading;
-    public AudioSource AK47Reloading;
-
-    public AudioClip AK47Shot;
     public AudioClip PistolShot;
-
     public AudioSource EmptyMagzine;
 
-    public AudioSource ThrowableChannel;
+    [Header("Ak-47 Sound")] 
+    public AudioSource AK47Reloading;
+    public AudioClip AK47Shot;
 
+    [Header("Grenade Sound")]
     public AudioClip GrenadeExplosion;
 
+    [Header("Zombie Sound")]
+    public AudioClip ZombieWalking;
+    public AudioClip ZombieChase;
+    public AudioClip ZombieAttack;
+    public AudioClip ZombieHurt;
+    public AudioClip ZombieDeath;
 
     public void PlayShootingSound(WeaponEnum weapon)
     {
@@ -31,8 +40,7 @@ public class SoundManager : GenericMonoSingleton<SoundManager>
 
             case WeaponEnum.Ak47:
                 ShootingChannel.PlayOneShot(AK47Shot);
-                break;
-                
+                break;         
         }
     }
 
@@ -47,7 +55,6 @@ public class SoundManager : GenericMonoSingleton<SoundManager>
             case WeaponEnum.Ak47:
                 AK47Reloading.Play();
                 break;
-
         }
     }
 }
