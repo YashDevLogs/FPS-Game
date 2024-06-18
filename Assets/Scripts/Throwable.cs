@@ -60,6 +60,7 @@ public class Throwable : MonoBehaviour
     {
         GameObject explosionEffect = GlobalReference.Instance.grenadeExplosionEffect;
         Instantiate(explosionEffect, transform.position, transform.rotation);
+        SoundManager.Instance.ThrowableChannel.PlayOneShot(SoundManager.Instance.GrenadeExplosion);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);
         foreach (Collider objectInRange in colliders)
@@ -68,6 +69,10 @@ public class Throwable : MonoBehaviour
             if(rb != null)
             {
                 rb.AddExplosionForce(explosionForce, transform.position, damageRadius);
+            }
+            if (objectInRange.gameObject.GetComponent<Enemy>())
+            {
+                objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(100);
             }
         }
     }

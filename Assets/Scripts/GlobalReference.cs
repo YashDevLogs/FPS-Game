@@ -8,4 +8,7 @@ public class GlobalReference : GenericMonoSingleton<GlobalReference>
     public GameObject BulletImpactEffectPrefab;
     public GameObject grenadeExplosionEffect;
 
+    public GameObject BloodSprayEffect;
+
+
 }
