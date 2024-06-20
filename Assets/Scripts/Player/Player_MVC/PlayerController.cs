@@ -1,18 +1,26 @@
-﻿using UnityEngine;
+﻿using UnityEngine.UI;
+using System.Collections;
+using UnityEngine;
 
-public class PlayerController
+public class PlayerController  
 {
     private PlayerModel model;
     private CharacterController controller;
+    private PlayerView playerView;
     private Transform playerTransform;
     private Transform groundCheck;
 
     private Vector3 lastPosition;
 
-    public PlayerController(PlayerModel model, CharacterController controller, Transform playerTransform, Transform groundCheck)
+    public bool isDead = false;
+
+
+
+    public PlayerController(PlayerModel model, CharacterController controller,PlayerView playerView, Transform playerTransform, Transform groundCheck)
     {
         this.model = model;
         this.controller = controller;
+        this.playerView = playerView;
         this.playerTransform = playerTransform;
         this.groundCheck = groundCheck;
         lastPosition = playerTransform.position;
@@ -65,10 +73,23 @@ public class PlayerController
         if (model.Health <= 0)
         {
             Debug.Log("Player died");
+            PlayerDead();
+            isDead = true;
         }
         else
         {
             Debug.Log("Player hit");
+            playerView.HeathUI.text = $"Health: {model.Health}";
+
         }
     }
+
+    private void PlayerDead()
+    {      
+        playerView.CameraAnim.enabled = true;
+        this.playerView.enabled = false;
+        playerView.HeathUI.gameObject.SetActive(false);
+        ScreenFader.Instance.StartFade();
+    }
+
 }
