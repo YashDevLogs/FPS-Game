@@ -10,6 +10,8 @@ public class SoundManager : GenericMonoSingleton<SoundManager>
     public AudioSource ThrowableChannel;
     public AudioSource ZombieChannel;
     public AudioSource ZombieChannel2;
+    public AudioSource PlayerChannel;
+    public AudioSource SFXChannel;
 
     [Header("Pistol Sound")]
     public AudioSource PistolReloading;
@@ -30,6 +32,19 @@ public class SoundManager : GenericMonoSingleton<SoundManager>
     public AudioClip ZombieHurt;
     public AudioClip ZombieDeath;
 
+
+    [Header("Player Sounds")]
+    public AudioClip PlayerHurt;
+    public AudioClip PlayerDead;
+    public AudioClip PlayerEfforts;
+    public AudioClip PlayerLowHealth;
+
+
+    [Header("Music SFX")]
+    public AudioClip CrowScreaming;
+    public AudioClip DeathMusic;
+
+
     public void PlayShootingSound(WeaponEnum weapon)
     {
         switch (weapon)
@@ -43,6 +58,17 @@ public class SoundManager : GenericMonoSingleton<SoundManager>
                 break;         
         }
     }
+
+    private void Start()
+    {
+        PlayerChannel.clip = PlayerEfforts;
+        PlayerChannel.loop = true;
+        PlayerChannel.Play();
+        SFXChannel.clip = CrowScreaming;
+        SFXChannel.loop = true;
+        SFXChannel.Play();
+    }
+
 
     public void PlayReloadSound(WeaponEnum weapon) 
     {

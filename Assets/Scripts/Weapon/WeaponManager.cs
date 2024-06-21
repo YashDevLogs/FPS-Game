@@ -156,7 +156,7 @@ public class WeaponManager : GenericMonoSingleton<WeaponManager>
                 break;
 
             case Weapon.WeaponEnum.Ak47:
-                totalPistolAmmo -= bulletsToDecrease;
+                totalRifleAmmo -= bulletsToDecrease;
                 break;
 
 

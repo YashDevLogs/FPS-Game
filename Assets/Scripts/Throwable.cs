@@ -6,7 +6,7 @@ using UnityEngine;
 public class Throwable : MonoBehaviour
 {
     [SerializeField] float delay = 3f;
-    [SerializeField] float damageRadius = 20f;
+    [SerializeField] float damageRadius = 10f;
     [SerializeField] float explosionForce = 1200f;
 
     float countdown;
@@ -72,7 +72,11 @@ public class Throwable : MonoBehaviour
             }
             if (objectInRange.gameObject.GetComponent<Enemy>())
             {
-                objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(100);
+                if(objectInRange.gameObject.GetComponent<Enemy>().isDead == false)
+                {
+                    objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(100);
+                }
+                
             }
         }
     }

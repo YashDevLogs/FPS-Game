@@ -74,22 +74,24 @@ public class PlayerController
         {
             Debug.Log("Player died");
             PlayerDead();
-            isDead = true;
+            SoundManager.Instance.SFXChannel.PlayOneShot(SoundManager.Instance.DeathMusic);
         }
         else
         {
             Debug.Log("Player hit");
             playerView.HeathUI.text = $"Health: {model.Health}";
-
+            SoundManager.Instance.PlayerChannel.PlayOneShot(SoundManager.Instance.PlayerHurt);
         }
     }
 
     private void PlayerDead()
-    {      
+    {
+        SoundManager.Instance.PlayerChannel.PlayOneShot(SoundManager.Instance.PlayerDead);
         playerView.CameraAnim.enabled = true;
         this.playerView.enabled = false;
         playerView.HeathUI.gameObject.SetActive(false);
         ScreenFader.Instance.StartFade();
+        isDead = true;
     }
 
 }

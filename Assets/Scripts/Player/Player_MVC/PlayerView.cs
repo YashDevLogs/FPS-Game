@@ -29,7 +29,6 @@ public class PlayerView : MonoBehaviour
 
     void Start()
     {
-        
         Cursor.lockState = CursorLockMode.Locked;
 
         characterController = GetComponent<CharacterController>();
@@ -64,13 +63,14 @@ public class PlayerView : MonoBehaviour
     {
         if(other.CompareTag("ZombieHand"))
         {
-            if(controller.isDead == false)
+            if(controller.isDead == false )
             {
                 controller.TakeDamage(other.gameObject.GetComponent<ZombieHandDamage>().damage);
                 StartCoroutine(BloodScreenEffect());
             }else if(controller.isDead) 
             {
                 StartCoroutine(ShowGameOverUI());
+
             }
 
         }
@@ -80,6 +80,7 @@ public class PlayerView : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         GameOverUI.gameObject.SetActive(true);
+
     }
 
     public IEnumerator BloodScreenEffect()

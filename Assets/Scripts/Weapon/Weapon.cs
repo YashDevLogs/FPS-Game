@@ -206,8 +206,6 @@ public class Weapon : MonoBehaviour
                 WeaponManager.Instance.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);         
         }
 
-
-
         IsReloading = false;
     }
     private void ResetShot()
