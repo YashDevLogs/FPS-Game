@@ -2,6 +2,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
@@ -81,6 +82,19 @@ public class PlayerView : MonoBehaviour
         yield return new WaitForSeconds(1f);
         GameOverUI.gameObject.SetActive(true);
 
+        int waveSurvived = GlobalReference.Instance.WaveNumber;
+
+        if(waveSurvived - 1 > SaveLoadManager.Instance.LoadHighScore())
+        {
+            SaveLoadManager.Instance.SaveHighScore(waveSurvived - 1);
+        }
+        StartCoroutine(ReturnToMenu());
+    }
+
+    private IEnumerator ReturnToMenu()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public IEnumerator BloodScreenEffect()
