@@ -1533,6 +1533,7 @@ MonoBehaviour:
     type: 3}
   BloodSprayEffect: {fileID: 274912588879963132, guid: 27ab3b4980b4fa048a5e9ce808b70925,
     type: 3}
+  WaveNumber: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
