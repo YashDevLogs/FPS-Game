@@ -75,9 +75,9 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
         switch (model)
         {
             case WeaponEnum.Pistol:
-                return IconManager.Pistol_Weapon;
+                return Resources.Load<GameObject>("Pistol_Weapon").GetComponent<SpriteRenderer>().sprite;
             case WeaponEnum.Ak47:
-                return IconManager.AK47_Weapon;
+                return Resources.Load<GameObject>("AK47_Weapon").GetComponent<SpriteRenderer>().sprite;
             default:
                 return null;
 
@@ -89,9 +89,9 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
         switch (model)
         {
             case WeaponEnum.Pistol:
-                return IconManager.Pistol_Ammo;
+                return Resources.Load<GameObject>("Pistol_Ammo").GetComponent<SpriteRenderer>().sprite;
             case WeaponEnum.Ak47:
-                return IconManager.Rifle_Ammo;
+                return Resources.Load<GameObject>("Rfile_Ammo").GetComponent<SpriteRenderer>().sprite;
             default:
                 return null;
 
