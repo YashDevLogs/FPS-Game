@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
     public float adsSpreadIntensity;
 
     [Header("Bullet")]
-    public GameObject BulletPrefab;
+    public Bullet BulletPrefab;
     public Transform BulletSpawn;
     public float BulletVelocity = 30f ;
     public float BulletPrefabLifespan = 3f;
@@ -47,6 +47,8 @@ public class Weapon : MonoBehaviour
     public Vector3 SpawnPosition;
     public Vector3 SpawnRotation;
 
+    public ObjectPool<Bullet> bulletPool;
+
     public enum ShootingMode
     {
         Single,
@@ -64,6 +66,8 @@ public class Weapon : MonoBehaviour
         BulletsLeft = MagzineSize;
 
         SpreadIntensity = hipSpreadIntensity;
+
+        bulletPool = new ObjectPool<Bullet>(BulletPrefab, 15);
     }
 
 
@@ -73,18 +77,16 @@ public class Weapon : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                Camera.main.fieldOfView = 40;
+                
                 EnterADS();
             }
 
 
             if (Input.GetMouseButtonUp(1))
             {
-                Camera.main.fieldOfView = 60;
+                
                 ExitADS();
             }
-
-
 
             GetComponent<Outline>().enabled = false;
             if (BulletsLeft == 0 && IsShooting)
@@ -123,17 +125,17 @@ public class Weapon : MonoBehaviour
 
     private void EnterADS()
     {
+        Camera.main.fieldOfView = 40;
         animator.SetTrigger("ADS_enter");
         isADS = true;
-        /*HUDManager.Instance.middleAim.SetActive(false);*/
         SpreadIntensity = adsSpreadIntensity;
     }
 
     private void ExitADS()
     {
+        Camera.main.fieldOfView = 60;
         animator.SetTrigger("ADS_exit");
         isADS = false;
-        /*HUDManager.Instance.middleAim.SetActive(true);*/
     }
 
 
@@ -152,26 +154,21 @@ public class Weapon : MonoBehaviour
         {
             animator.SetTrigger("RECOIL");
         }
-
-        
+       
         CartridgeEjectEffecst.GetComponent<ParticleSystem>().Play();
 
         ReadyToShoot = false;
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
-        
-        GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, Quaternion.identity);
 
-        Bullet bul = bullet.GetComponent<Bullet>();
-        bul.BulletDamage = WeaponDamage;
-
+        Bullet bullet = bulletPool.Get();
+        bullet.transform.position = BulletSpawn.position;
         bullet.transform.forward = shootingDirection;
+        bullet.BulletDamage = WeaponDamage;
+        bullet.GetComponent<Rigidbody>().velocity = shootingDirection * BulletVelocity;
+        bullet.SetPool(bulletPool);
 
-        bullet.GetComponent<Rigidbody>().AddForce(shootingDirection *  BulletVelocity, ForceMode.Impulse);
-
-        StartCoroutine(DestroyBulletAfterTime(bullet, BulletPrefabLifespan));
-
-        if(AllowReset)
+        if (AllowReset)
         {
             Invoke("ResetShot", ShootingDelay);
             AllowReset = false;

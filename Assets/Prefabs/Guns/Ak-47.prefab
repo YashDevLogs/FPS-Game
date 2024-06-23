@@ -10725,7 +10725,7 @@ MonoBehaviour:
   SpreadIntensity: 0.1
   hipSpreadIntensity: 0
   adsSpreadIntensity: 0
-  BulletPrefab: {fileID: 5440297653434529511, guid: f96a9ba247225424ba74bd59e8db102d,
+  BulletPrefab: {fileID: -2316835761503524621, guid: f96a9ba247225424ba74bd59e8db102d,
     type: 3}
   BulletSpawn: {fileID: 5664324865210367466}
   BulletVelocity: 700

@@ -22,17 +22,19 @@ public class ZombieSpawnerController : MonoBehaviour
 
     public List<Enemy> CurrentZombiesAlive;
 
-    public GameObject ZombiePrefab;
+    public Enemy ZombiePrefab;
 
     public TextMeshProUGUI WaveOverUI;
     public TextMeshProUGUI CountdownTimerUI;
     public TextMeshProUGUI CurrentWaveUI;
 
+    public ObjectPool<Enemy> zombiePool;
+
     private void Start()
     {
         
         CurrentZombiesPerWave = InitialZombiesPerWave;
-
+        zombiePool = new ObjectPool<Enemy>(ZombiePrefab, 20);
         StartNextWave();
     }
 
@@ -54,11 +56,10 @@ public class ZombieSpawnerController : MonoBehaviour
             Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
             Vector3 spawnPos = transform.position + spawnOffset;
 
-            var zombie = Instantiate(ZombiePrefab, spawnPos, Quaternion.identity);
-
-            Enemy enemyScript = zombie.GetComponent<Enemy>();
-
-            CurrentZombiesAlive.Add(enemyScript);
+            var zombie = zombiePool.Get();
+            zombie.transform.position = spawnPos;
+            zombie.transform.rotation = Quaternion.identity;
+            CurrentZombiesAlive.Add(zombie);
 
             yield return new WaitForSeconds(SpawnDelay);
         }
@@ -73,6 +74,7 @@ public class ZombieSpawnerController : MonoBehaviour
             if(zombie.isDead)
             {
                 zombiesToRemove.Add(zombie);
+                zombiePool.ReturnToPool(zombie);
             }
         }
 
