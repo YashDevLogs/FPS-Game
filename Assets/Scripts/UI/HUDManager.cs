@@ -5,65 +5,46 @@ using UnityEngine.UI;
 using static Weapon;
 
 
-public class HUDManager : GenericMonoSingleton<HUDManager>
+public class HUDManager 
 {
-    [Header("Ammo")]
-    public TextMeshProUGUI magzineAmmoUI;
-    public TextMeshProUGUI totalAmmoUI;
-    public Image ammoTypeUI;
-
-    [Header("Weapon")]
-    public Image activeWeaponUI;
-    public Image unActiceWeaponUI;
-
-    [Header("Throwables")]
-    public Image lethalUI;
-    public TextMeshProUGUI lethalAmountUI;
-
-    public Image tacticalUI;
-    public TextMeshProUGUI tacticalAmountUI;
-
-    public Sprite emptySlot;
-    public GameObject middleAim;
-
-    private void Update()
+    public void Update()
     {
-        Weapon activeWeapon = WeaponManager.Instance.activeWeaponSlot.GetComponentInChildren<Weapon>();
+        Weapon activeWeapon = ServiceLocator.Instance.WeaponManager.activeWeaponSlot.GetComponentInChildren<Weapon>();
         Weapon unActiveWeapon = GetUnActiveWeaponSlot().GetComponentInChildren<Weapon>();
 
         if (activeWeapon)
         {
-            magzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}";
-            totalAmmoUI.text = $"{WeaponManager.Instance.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
+            ServiceLocator.Instance.GlobalReference.magzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}";
+            ServiceLocator.Instance.GlobalReference.totalAmmoUI.text = $"{ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
 
             Weapon.WeaponEnum model = activeWeapon.ThisWeaponModel;
-            ammoTypeUI.sprite = GetAmmoSprite(model);
+            ServiceLocator.Instance.GlobalReference.ammoTypeUI.sprite = GetAmmoSprite(model);
 
-            activeWeaponUI.sprite = GetWeaponSprite(model);
+            ServiceLocator.Instance.GlobalReference.activeWeaponUI.sprite = GetWeaponSprite(model);
 
             if (unActiveWeapon)
             {
-                unActiceWeaponUI.sprite = GetWeaponSprite(unActiveWeapon.ThisWeaponModel);
+                ServiceLocator.Instance.GlobalReference.unActiceWeaponUI.sprite = GetWeaponSprite(unActiveWeapon.ThisWeaponModel);
 
             }
         }
         else
         {
-            magzineAmmoUI.text = "";
-            totalAmmoUI.text = "";
+            ServiceLocator.Instance.GlobalReference.magzineAmmoUI.text = "";
+            ServiceLocator.Instance.GlobalReference.totalAmmoUI.text = "";
 
-            ammoTypeUI.sprite = emptySlot;
+            ServiceLocator.Instance.GlobalReference.ammoTypeUI.sprite = ServiceLocator.Instance.GlobalReference.emptySlot;
 
-            activeWeaponUI.sprite = emptySlot;  
-            unActiceWeaponUI.sprite= emptySlot;
+            ServiceLocator.Instance.GlobalReference.activeWeaponUI.sprite = ServiceLocator.Instance.GlobalReference.emptySlot;
+            ServiceLocator.Instance.GlobalReference.unActiceWeaponUI.sprite= ServiceLocator.Instance.GlobalReference.emptySlot;
         }
     }
 
     private GameObject GetUnActiveWeaponSlot()
     {
-        foreach (GameObject weaponSlot in WeaponManager.Instance.weaponSlots)
+        foreach (GameObject weaponSlot in ServiceLocator.Instance.GlobalReference.weaponSlots)
         {
-            if (weaponSlot != WeaponManager.Instance.activeWeaponSlot)
+            if (weaponSlot != ServiceLocator.Instance.WeaponManager.activeWeaponSlot)
             {
                 return weaponSlot;
             }
@@ -103,8 +84,8 @@ public class HUDManager : GenericMonoSingleton<HUDManager>
         switch(throwable)
         {
             case Throwable.ThrowableType.Grenade:
-                lethalAmountUI.text = $"{WeaponManager.Instance.grenades}";
-                lethalUI.sprite = Resources.Load<GameObject>("Frag").GetComponent<SpriteRenderer>().sprite;
+                ServiceLocator.Instance.GlobalReference.lethalAmountUI.text = $"{ServiceLocator.Instance.WeaponManager.grenades}";
+                ServiceLocator.Instance.GlobalReference.lethalUI.sprite = Resources.Load<GameObject>("Frag").GetComponent<SpriteRenderer>().sprite;
                 break;
         }
     }

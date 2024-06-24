@@ -91,7 +91,7 @@ public class Weapon : MonoBehaviour
             GetComponent<Outline>().enabled = false;
             if (BulletsLeft == 0 && IsShooting)
             {
-                SoundManager.Instance.EmptyMagzine.Play();
+                ServiceLocator.Instance.SoundManager.EmptyMagzine.Play();
             }
 
             if (CurrentShootingMode == ShootingMode.Auto)
@@ -103,11 +103,11 @@ public class Weapon : MonoBehaviour
                 IsShooting = Input.GetKeyDown(KeyCode.Mouse0);
             }
 
-            if (Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading && WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > 0)
+            if (Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading && ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > 0)
             {
                 Reload();
             }
-            if (ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft == 0 && WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > 0)
+            if (ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft == 0 && ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > 0)
             {
                 Reload();
             }
@@ -144,7 +144,7 @@ public class Weapon : MonoBehaviour
         BulletsLeft--;
         MuzzleEffect.GetComponent<ParticleSystem>().Play();
 
-        SoundManager.Instance.PlayShootingSound(ThisWeaponModel);
+        ServiceLocator.Instance.SoundManager.PlayShootingSound(ThisWeaponModel);
 
         if (isADS)
         {
@@ -184,7 +184,7 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
-        SoundManager.Instance.PlayReloadSound(ThisWeaponModel);
+        ServiceLocator.Instance.SoundManager.PlayReloadSound(ThisWeaponModel);
         IsReloading = true;
         animator.SetTrigger("IsReloading");
         Invoke("ReloadComplete", ReloadTime);
@@ -192,15 +192,15 @@ public class Weapon : MonoBehaviour
 
     private void ReloadComplete()
     {
-       if(WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel) > MagzineSize)
+       if(ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > MagzineSize)
         {
             BulletsLeft = MagzineSize;
-            WeaponManager.Instance.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
+            ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
         }
         else 
         {
-                BulletsLeft = WeaponManager.Instance.CheckAmmoLeft(ThisWeaponModel);
-                WeaponManager.Instance.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);         
+                BulletsLeft = ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel);
+                ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);         
         }
 
         IsReloading = false;

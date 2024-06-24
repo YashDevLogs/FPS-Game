@@ -5,11 +5,12 @@ using System.Diagnostics;
 using UnityEngine;
 using static Weapon;
 
-public class WeaponManager : GenericMonoSingleton<WeaponManager>
+public class WeaponManager 
 {
 
-    public List<GameObject> weaponSlots;
+
     public GameObject activeWeaponSlot;
+
 
     [Header("Ammo")]
     public int totalPistolAmmo = 0;
@@ -17,22 +18,19 @@ public class WeaponManager : GenericMonoSingleton<WeaponManager>
 
     [Header("Throwable")]
     public int grenades = 0;
-    public float throwForce = 10f;
-    public GameObject grenadePrefab;
-    public GameObject throwableSpawn;
-    public float forceMultiplier = 0f;
-    public float forceMultiplierLimit = 2f;
+    private float throwForce = 10f;
+    private float forceMultiplier = 0f;
+    private float forceMultiplierLimit = 2f;
 
 
-
-    private void Start()
+    public void Initialize()
     {
-        activeWeaponSlot = weaponSlots[0];
+        activeWeaponSlot = ServiceLocator.Instance.GlobalReference.weaponSlots[0];
     }
 
-    private void Update()
+    public void Update()
     {
-        foreach(GameObject weaponSlot in weaponSlots)
+        foreach(GameObject weaponSlot in ServiceLocator.Instance.GlobalReference.weaponSlots)
         {
             if (weaponSlot == activeWeaponSlot) 
             { 
@@ -120,7 +118,7 @@ public class WeaponManager : GenericMonoSingleton<WeaponManager>
             currentWeapon.isActiveWeapon = false;
         }
 
-        activeWeaponSlot = weaponSlots[slotNumber];
+        activeWeaponSlot = ServiceLocator.Instance.GlobalReference.weaponSlots[slotNumber];
 
         if (activeWeaponSlot.transform.childCount > 0)
         {
@@ -194,22 +192,22 @@ public class WeaponManager : GenericMonoSingleton<WeaponManager>
     private void PickUpGrenade()
     {
         grenades += 1;
-        HUDManager.Instance.UpdateThrowable(Throwable.ThrowableType.Grenade);
+        ServiceLocator.Instance.HUDManager.UpdateThrowable(Throwable.ThrowableType.Grenade);
 
 
     }
 
     private void ThrowLethal()
     {
-        GameObject lethalPrefab = grenadePrefab;
+        GameObject lethalPrefab = ServiceLocator.Instance.GlobalReference.grenadePrefab;
 
-        GameObject throwable = Instantiate(lethalPrefab, throwableSpawn.transform.position, Camera.main.transform.rotation);
+        GameObject throwable = GameObject.Instantiate(lethalPrefab, ServiceLocator.Instance.GlobalReference.throwableSpawn.transform.position, Camera.main.transform.rotation);
         Rigidbody rb = throwable.GetComponent<Rigidbody>();
-        rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse) ;
-        throwable.GetComponent<Throwable>().hasBeenThrown = true ;
+        rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
+        throwable.GetComponent<Throwable>().hasBeenThrown = true;
         grenades -= 1;
 
-        HUDManager.Instance.UpdateThrowable (Throwable.ThrowableType.Grenade);
+        ServiceLocator.Instance.HUDManager.UpdateThrowable (Throwable.ThrowableType.Grenade);
 
     }
 

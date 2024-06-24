@@ -1,26 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractionManager : GenericMonoSingleton<InteractionManager>
+public class InteractionManager
 {
     public Weapon hoveredWeapon = null;
     public AmmoBox hoveredAmmoBox = null;
     public Throwable hoveredThrowable = null;
 
-    private void Update()
+    public void Update()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit))
         {
             GameObject objectHitByRayCast = hit.transform.gameObject;
 
             //Weapons
-            if(objectHitByRayCast.GetComponent<Weapon>() && objectHitByRayCast.GetComponent<Weapon>().isActiveWeapon == false )
+            if (objectHitByRayCast.GetComponent<Weapon>() && objectHitByRayCast.GetComponent<Weapon>().isActiveWeapon == false)
             {
-
                 if (hoveredWeapon)
                 {
                     hoveredWeapon.GetComponent<Outline>().enabled = false;
@@ -31,19 +28,10 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    WeaponManager.Instance.PickUpWeapon(objectHitByRayCast.gameObject); 
+                    ServiceLocator.Instance.WeaponManager.PickUpWeapon(objectHitByRayCast);
                 }
             }
-            else
-            {
-                if (hoveredWeapon)
-                {
-                    hoveredWeapon.GetComponent<Outline>().enabled = false;
-                }
-            }
-
-            //Ammo
-            if (objectHitByRayCast.GetComponentInChildren<AmmoBox>())
+            else if (objectHitByRayCast.GetComponent<AmmoBox>())
             {
                 if (hoveredAmmoBox)
                 {
@@ -51,47 +39,63 @@ public class InteractionManager : GenericMonoSingleton<InteractionManager>
                 }
 
                 hoveredAmmoBox = objectHitByRayCast.gameObject.GetComponent<AmmoBox>();
-                hoveredAmmoBox.GetComponentInChildren<Outline>().enabled = true;
+                hoveredAmmoBox.GetComponent<Outline>().enabled = true;
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    WeaponManager.Instance.PickUpAmmoBox(hoveredAmmoBox);
-                    Destroy(objectHitByRayCast.gameObject);
-                }
-            }
-            else
-            {
-                if (hoveredAmmoBox)
-                {
+                    ServiceLocator.Instance.WeaponManager.PickUpAmmoBox(objectHitByRayCast.GetComponent<AmmoBox>());
                     hoveredAmmoBox.GetComponent<Outline>().enabled = false;
+                    hoveredAmmoBox = null;
+                    GameObject.Destroy(objectHitByRayCast);
                 }
             }
-
-            // Throwables
-            if (objectHitByRayCast.GetComponentInChildren<Throwable>())
+            else if (objectHitByRayCast.GetComponent<Throwable>())
             {
                 if (hoveredThrowable)
                 {
                     hoveredThrowable.GetComponent<Outline>().enabled = false;
                 }
 
-                hoveredThrowable = objectHitByRayCast.gameObject.GetComponent<Throwable>();
-                hoveredThrowable.GetComponentInChildren<Outline>().enabled = true;
+                hoveredThrowable = objectHitByRayCast.GetComponent<Throwable>();
+                hoveredThrowable.GetComponent<Outline>().enabled = true;
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    WeaponManager.Instance.PickUpThrowable(hoveredThrowable);
-                    Destroy(objectHitByRayCast.gameObject);
+                    ServiceLocator.Instance.WeaponManager.PickUpThrowable(objectHitByRayCast.GetComponent<Throwable>());
+                    hoveredThrowable.GetComponent<Outline>().enabled = false;
+                    hoveredThrowable = null;
+                    GameObject.Destroy(objectHitByRayCast);
                 }
             }
             else
             {
-                if (hoveredThrowable)
-                {
-                    hoveredThrowable.GetComponent<Outline>().enabled = false;
-                }
+                ResetHover();
             }
+        }
+        else
+        {
+            ResetHover();
+        }
+    }
 
+    private void ResetHover()
+    {
+        if (hoveredWeapon)
+        {
+            hoveredWeapon.GetComponent<Outline>().enabled = false;
+            hoveredWeapon = null;
+        }
+
+        if (hoveredAmmoBox)
+        {
+            hoveredAmmoBox.GetComponent<Outline>().enabled = false;
+            hoveredAmmoBox = null;
+        }
+
+        if (hoveredThrowable)
+        {
+            hoveredThrowable.GetComponent<Outline>().enabled = false;
+            hoveredThrowable = null;
         }
     }
 }

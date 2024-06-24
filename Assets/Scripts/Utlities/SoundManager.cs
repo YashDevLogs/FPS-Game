@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Weapon;
 
-public class SoundManager : GenericMonoSingleton<SoundManager>
+public class SoundManager: MonoBehaviour 
 {
     [Header("Audio Source Channel")]
     public AudioSource ShootingChannel;
@@ -59,7 +59,7 @@ public class SoundManager : GenericMonoSingleton<SoundManager>
         }
     }
 
-    private void Start()
+    public void Start()
     {
         PlayerChannel.clip = PlayerEfforts;
         PlayerChannel.loop = true;

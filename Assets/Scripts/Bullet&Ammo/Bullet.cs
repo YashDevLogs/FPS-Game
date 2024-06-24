@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviour
         ContactPoint contact = ObjectWeHit.contacts[0];
 
         GameObject BloodSprayPrefab = Instantiate(
-            GlobalReference.Instance.BloodSprayEffect,
+            ServiceLocator.Instance.GlobalReference.BloodSprayEffect,
             contact.point,
             Quaternion.LookRotation(contact.normal)
             );
@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
         ContactPoint contact = ObjectWeHit.contacts[0];
 
         GameObject hole = Instantiate(
-            GlobalReference.Instance.BulletImpactEffectPrefab,
+            ServiceLocator.Instance.GlobalReference.BulletImpactEffectPrefab,
             contact.point,
             Quaternion.LookRotation(contact.normal)
             ); 

@@ -19,10 +19,10 @@ public class ZombieAttackState : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (SoundManager.Instance.ZombieChannel.isPlaying == false)
+        if (ServiceLocator.Instance.SoundManager.ZombieChannel.isPlaying == false)
         {
-            SoundManager.Instance.ZombieChannel.clip = SoundManager.Instance.ZombieWalking;
-            SoundManager.Instance.ZombieChannel.PlayDelayed(1f);
+            ServiceLocator.Instance.SoundManager.ZombieChannel.clip = ServiceLocator.Instance.SoundManager.ZombieWalking;
+            ServiceLocator.Instance.SoundManager.ZombieChannel.PlayDelayed(1f);
 
         }
 
@@ -50,7 +50,7 @@ public class ZombieAttackState : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SoundManager.Instance.ZombieChannel.Stop();
+        ServiceLocator.Instance.SoundManager.ZombieChannel.Stop();
     }
 
 
