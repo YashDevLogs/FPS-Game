@@ -38,4 +38,6 @@ public class GlobalReference : MonoBehaviour
     public Sprite emptySlot;
     public GameObject middleAim;
 
+    public int WaveNumber;
+
 }

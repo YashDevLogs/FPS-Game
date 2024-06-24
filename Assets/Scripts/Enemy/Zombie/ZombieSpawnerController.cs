@@ -23,7 +23,6 @@ public class ZombieSpawnerController : MonoBehaviour
 
     public List<Enemy> CurrentZombiesAlive;
 
-<
     public Enemy ZombiePrefab;
 
 

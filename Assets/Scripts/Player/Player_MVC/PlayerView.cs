@@ -82,7 +82,7 @@ public class PlayerView : MonoBehaviour
         yield return new WaitForSeconds(1f);
         GameOverUI.gameObject.SetActive(true);
 
-        int waveSurvived = GlobalReference.Instance.WaveNumber;
+        int waveSurvived = ServiceLocator.Instance.GlobalReference.WaveNumber;
 
         if(waveSurvived - 1 > SaveLoadManager.Instance.LoadHighScore())
         {

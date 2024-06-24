@@ -268,6 +268,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192839639}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &229084614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3013418586432387829, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3307811984655056235}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &229084619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229084614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54cdbe2ed60489643b47948f2d43a3df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeImage: {fileID: 1545032363}
+  fadeDuration: 3
 --- !u!4 &297834741 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5207844042421315464, guid: 52f9f158480b12d4ab6483b3a4696c6a,
@@ -632,8 +652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4011fa1dc42de7143863a4ba935cb6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalReference: {fileID: 805082282}
-  SoundManager: {fileID: 1124723433}
+  GlobalReference: {fileID: 805082283}
+  SoundManager: {fileID: 1124723444}
 --- !u!4 &495613649
 Transform:
   m_ObjectHideFlags: 0
@@ -1162,7 +1182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 805082281}
-  - component: {fileID: 805082282}
+  - component: {fileID: 805082283}
   m_Layer: 0
   m_Name: GlobalReferences
   m_TagString: Untagged
@@ -1185,7 +1205,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 495613649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &805082282
+--- !u!114 &805082283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1194,7 +1214,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 805082280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33e3c69325c542b4a96b631c0ccd8b4a, type: 3}
+  m_Script: {fileID: 11500000, guid: deb5737f2b8948c44b25eb5f23bfaf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BulletImpactEffectPrefab: {fileID: 1203850111475005254, guid: 97a8cf90ebe019f44b5a2d171edb7b69,
@@ -1203,7 +1223,6 @@ MonoBehaviour:
     type: 3}
   BloodSprayEffect: {fileID: 274912588879963132, guid: 27ab3b4980b4fa048a5e9ce808b70925,
     type: 3}
-
   grenadePrefab: {fileID: 8640308238885018320, guid: 13129a450c08c6c409218585a639cca8,
     type: 3}
   throwableSpawn: {fileID: 1224108483}
@@ -1221,7 +1240,7 @@ MonoBehaviour:
   tacticalAmountUI: {fileID: 1216626481483641558}
   emptySlot: {fileID: 21300000, guid: 43b37fd46a033c447b21a3d7fa2a3d75, type: 3}
   middleAim: {fileID: 1506928708}
-
+  WaveNumber: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,16 +2117,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124723434}
-  - component: {fileID: 1124723433}
-  - component: {fileID: 1124723438}
   - component: {fileID: 1124723437}
   - component: {fileID: 1124723436}
   - component: {fileID: 1124723435}
+  - component: {fileID: 1124723438}
   - component: {fileID: 1124723439}
   - component: {fileID: 1124723440}
   - component: {fileID: 1124723441}
   - component: {fileID: 1124723442}
   - component: {fileID: 1124723443}
+  - component: {fileID: 1124723444}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -2115,41 +2134,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1124723433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124723432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722fcec3d0e4dea4184a3ac4b8199377, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShootingChannel: {fileID: 1124723438}
-  ThrowableChannel: {fileID: 1124723439}
-  ZombieChannel: {fileID: 1124723440}
-  ZombieChannel2: {fileID: 1124723441}
-  PlayerChannel: {fileID: 1124723442}
-  SFXChannel: {fileID: 1124723443}
-  PistolReloading: {fileID: 1124723437}
-  PistolShot: {fileID: 8300000, guid: 8f259301b2c4b4147a85602a29152d70, type: 3}
-  EmptyMagzine: {fileID: 1124723435}
-  AK47Reloading: {fileID: 1124723436}
-  AK47Shot: {fileID: 8300000, guid: c16a4b8aaf940b74bbe1574135f03566, type: 3}
-  GrenadeExplosion: {fileID: 8300000, guid: 3e6a361bb6be0f7458e0c5f4b5f06888, type: 3}
-  ZombieWalking: {fileID: 8300000, guid: db271a69cfadd7c44b58fe348781be83, type: 3}
-  ZombieChase: {fileID: 8300000, guid: e1e7f406c66d0c34f94726e83f3b5cbd, type: 3}
-  ZombieAttack: {fileID: 8300000, guid: cde270cff5854d942a93d4d229ae6657, type: 3}
-  ZombieHurt: {fileID: 8300000, guid: d941ee0e78483614a8fe4d9f79b82b63, type: 3}
-  ZombieDeath: {fileID: 8300000, guid: c69262ffb5b4ecd4a965c340076f0708, type: 3}
-  PlayerHurt: {fileID: 8300000, guid: 96d56d230d9716c4bbf1958392a15cfb, type: 3}
-  PlayerDead: {fileID: 8300000, guid: ddc650b445586454e9e4f5e74d58d0ed, type: 3}
-  PlayerEfforts: {fileID: 8300000, guid: 7b11381004d5c7f4a9f41ae7a53e9521, type: 3}
-  PlayerLowHealth: {fileID: 8300000, guid: 744f62ff52d876d43a26bd5760f14129, type: 3}
-  CrowScreaming: {fileID: 8300000, guid: b7be6ea1af0c5544f8d6787be3a84106, type: 3}
-  DeathMusic: {fileID: 8300000, guid: 4873dd29be1757d43a44eca9caf619ed, type: 3}
 --- !u!4 &1124723434
 Transform:
   m_ObjectHideFlags: 0
@@ -3029,6 +3013,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1124723444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124723432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4227b4e5f895a124ea064b542918bc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShootingChannel: {fileID: 1124723438}
+  ThrowableChannel: {fileID: 1124723439}
+  ZombieChannel: {fileID: 1124723440}
+  ZombieChannel2: {fileID: 1124723441}
+  PlayerChannel: {fileID: 1124723442}
+  SFXChannel: {fileID: 1124723443}
+  PistolReloading: {fileID: 1124723437}
+  PistolShot: {fileID: 8300000, guid: 8f259301b2c4b4147a85602a29152d70, type: 3}
+  EmptyMagzine: {fileID: 1124723435}
+  AK47Reloading: {fileID: 1124723436}
+  AK47Shot: {fileID: 8300000, guid: c16a4b8aaf940b74bbe1574135f03566, type: 3}
+  GrenadeExplosion: {fileID: 8300000, guid: 3e6a361bb6be0f7458e0c5f4b5f06888, type: 3}
+  ZombieWalking: {fileID: 8300000, guid: db271a69cfadd7c44b58fe348781be83, type: 3}
+  ZombieChase: {fileID: 8300000, guid: e1e7f406c66d0c34f94726e83f3b5cbd, type: 3}
+  ZombieAttack: {fileID: 8300000, guid: cde270cff5854d942a93d4d229ae6657, type: 3}
+  ZombieHurt: {fileID: 8300000, guid: d941ee0e78483614a8fe4d9f79b82b63, type: 3}
+  ZombieDeath: {fileID: 8300000, guid: c69262ffb5b4ecd4a965c340076f0708, type: 3}
+  PlayerHurt: {fileID: 8300000, guid: 96d56d230d9716c4bbf1958392a15cfb, type: 3}
+  PlayerDead: {fileID: 8300000, guid: ddc650b445586454e9e4f5e74d58d0ed, type: 3}
+  PlayerEfforts: {fileID: 8300000, guid: 7b11381004d5c7f4a9f41ae7a53e9521, type: 3}
+  PlayerLowHealth: {fileID: 8300000, guid: 744f62ff52d876d43a26bd5760f14129, type: 3}
+  CrowScreaming: {fileID: 8300000, guid: b7be6ea1af0c5544f8d6787be3a84106, type: 3}
+  DeathMusic: {fileID: 8300000, guid: 4873dd29be1757d43a44eca9caf619ed, type: 3}
 --- !u!1001 &1160423209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6548,10 +6567,25 @@ PrefabInstance:
       propertyPath: m_Data.m_Target
       value: 
       objectReference: {fileID: 297834741}
-    m_RemovedComponents: []
+    - target: {fileID: 9083660715694713490, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083660715694713490, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.642
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1668225011893978949, guid: 08976ebbdc1a95e48b9dee4dc35f15a2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3013418586432387829, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 229084619}
   m_SourcePrefab: {fileID: 100100000, guid: 08976ebbdc1a95e48b9dee4dc35f15a2, type: 3}
 --- !u!1001 &3406712262465076839
 PrefabInstance:
