@@ -38,18 +38,18 @@ public class Enemy : MonoBehaviour
                 ZombieAnim.SetTrigger("DIE2");
             }
             isDead = true;
-            SoundManager.Instance.ZombieChannel2.PlayOneShot(SoundManager.Instance.ZombieDeath);
+
+            ServiceLocator.Instance.SoundManager.ZombieChannel2.PlayOneShot(ServiceLocator.Instance.SoundManager.ZombieDeath);
+
         }
         else 
         {
             ZombieAnim.SetTrigger("DAMAGE");
-            SoundManager.Instance.ZombieChannel2.PlayOneShot(SoundManager.Instance.ZombieHurt);
+            ServiceLocator.Instance.SoundManager.ZombieChannel2.PlayOneShot(ServiceLocator.Instance.SoundManager.ZombieHurt);
 
         }
     }
 
-    void Update()
-    {
 
-    }
+
 }

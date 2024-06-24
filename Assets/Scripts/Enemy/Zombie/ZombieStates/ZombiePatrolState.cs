@@ -18,10 +18,12 @@ public class ZombiePatrolState : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(SoundManager.Instance.ZombieChannel.isPlaying == false)
+
+        if(ServiceLocator.Instance.SoundManager.ZombieChannel.isPlaying == false)
         {
-            SoundManager.Instance.ZombieChannel.clip = SoundManager.Instance.ZombieWalking;
-            SoundManager.Instance.ZombieChannel.PlayDelayed(1f);
+            ServiceLocator.Instance.SoundManager.ZombieChannel.clip = ServiceLocator.Instance.SoundManager.ZombieWalking;
+            ServiceLocator.Instance.SoundManager.ZombieChannel.PlayDelayed(1f);
+
         }
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -68,6 +70,8 @@ public class ZombiePatrolState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(agent.transform.position);
-        SoundManager.Instance.ZombieChannel.Stop();
+
+        ServiceLocator.Instance.SoundManager.ZombieChannel.Stop();
+
     }
 }

@@ -74,19 +74,19 @@ public class PlayerController
         {
             Debug.Log("Player died");
             PlayerDead();
-            SoundManager.Instance.SFXChannel.PlayOneShot(SoundManager.Instance.DeathMusic);
+            ServiceLocator.Instance.SoundManager.SFXChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.DeathMusic);
         }
         else
         {
             Debug.Log("Player hit");
             playerView.HeathUI.text = $"Health: {model.Health}";
-            SoundManager.Instance.PlayerChannel.PlayOneShot(SoundManager.Instance.PlayerHurt);
+            ServiceLocator.Instance.SoundManager.PlayerChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.PlayerHurt);
         }
     }
 
     private void PlayerDead()
     {
-        SoundManager.Instance.PlayerChannel.PlayOneShot(SoundManager.Instance.PlayerDead);
+        ServiceLocator.Instance.SoundManager.PlayerChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.PlayerDead);
         playerView.CameraAnim.enabled = true;
         this.playerView.enabled = false;
         playerView.HeathUI.gameObject.SetActive(false);
