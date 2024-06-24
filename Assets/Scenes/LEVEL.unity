@@ -1203,6 +1203,7 @@ MonoBehaviour:
     type: 3}
   BloodSprayEffect: {fileID: 274912588879963132, guid: 27ab3b4980b4fa048a5e9ce808b70925,
     type: 3}
+
   grenadePrefab: {fileID: 8640308238885018320, guid: 13129a450c08c6c409218585a639cca8,
     type: 3}
   throwableSpawn: {fileID: 1224108483}
@@ -1220,6 +1221,7 @@ MonoBehaviour:
   tacticalAmountUI: {fileID: 1216626481483641558}
   emptySlot: {fileID: 21300000, guid: 43b37fd46a033c447b21a3d7fa2a3d75, type: 3}
   middleAim: {fileID: 1506928708}
+
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

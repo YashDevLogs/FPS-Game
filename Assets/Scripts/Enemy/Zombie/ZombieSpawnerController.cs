@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+
 using Random = UnityEngine.Random;
 
 public class ZombieSpawnerController : MonoBehaviour
@@ -22,19 +23,25 @@ public class ZombieSpawnerController : MonoBehaviour
 
     public List<Enemy> CurrentZombiesAlive;
 
+<
     public Enemy ZombiePrefab;
+
 
     public TextMeshProUGUI WaveOverUI;
     public TextMeshProUGUI CountdownTimerUI;
     public TextMeshProUGUI CurrentWaveUI;
 
+
     public ObjectPool<Enemy> zombiePool;
+
 
     private void Start()
     {
         
         CurrentZombiesPerWave = InitialZombiesPerWave;
+
         zombiePool = new ObjectPool<Enemy>(ZombiePrefab, 20);
+
         StartNextWave();
     }
 
@@ -61,6 +68,7 @@ public class ZombieSpawnerController : MonoBehaviour
             zombie.transform.rotation = Quaternion.identity;
             CurrentZombiesAlive.Add(zombie);
 
+
             yield return new WaitForSeconds(SpawnDelay);
         }
     }
@@ -74,7 +82,9 @@ public class ZombieSpawnerController : MonoBehaviour
             if(zombie.isDead)
             {
                 zombiesToRemove.Add(zombie);
+
                 zombiePool.ReturnToPool(zombie);
+
             }
         }
 
@@ -117,4 +127,7 @@ public class ZombieSpawnerController : MonoBehaviour
         CurrentZombiesPerWave *= 2;
         StartNextWave();
     }
+
+
+
 }

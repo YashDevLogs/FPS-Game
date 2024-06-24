@@ -38,7 +38,9 @@ public class Enemy : MonoBehaviour
                 ZombieAnim.SetTrigger("DIE2");
             }
             isDead = true;
+
             ServiceLocator.Instance.SoundManager.ZombieChannel2.PlayOneShot(ServiceLocator.Instance.SoundManager.ZombieDeath);
+
         }
         else 
         {
@@ -47,4 +49,7 @@ public class Enemy : MonoBehaviour
 
         }
     }
+
+
+
 }
