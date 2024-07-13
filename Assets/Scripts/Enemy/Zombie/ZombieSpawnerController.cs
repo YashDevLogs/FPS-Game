@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 using Random = UnityEngine.Random;
@@ -25,39 +23,32 @@ public class ZombieSpawnerController : MonoBehaviour
 
     public Enemy ZombiePrefab;
 
-
     public TextMeshProUGUI WaveOverUI;
     public TextMeshProUGUI CountdownTimerUI;
     public TextMeshProUGUI CurrentWaveUI;
 
-
     public ObjectPool<Enemy> zombiePool;
-
 
     private void Start()
     {
-        
         CurrentZombiesPerWave = InitialZombiesPerWave;
-
-        zombiePool = new ObjectPool<Enemy>(ZombiePrefab, 20);
-
+        zombiePool = new ObjectPool<Enemy>(ZombiePrefab, 70);
+        ServiceLocator.Instance.GlobalReference.WaveNumber = CurrentWave;
         StartNextWave();
     }
 
     private void StartNextWave()
     {
         CurrentZombiesAlive.Clear();
-
         CurrentWave++;
-
+        ServiceLocator.Instance.GlobalReference.WaveNumber = CurrentWave;
         CurrentWaveUI.text = "WAVE: " + CurrentWave.ToString();
-
         StartCoroutine(SpawnWave());
     }
 
     private IEnumerator SpawnWave()
     {
-       for(int i = 0; i < CurrentZombiesPerWave;  i++)
+        for (int i = 0; i < CurrentZombiesPerWave; i++)
         {
             Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
             Vector3 spawnPos = transform.position + spawnOffset;
@@ -66,7 +57,6 @@ public class ZombieSpawnerController : MonoBehaviour
             zombie.transform.position = spawnPos;
             zombie.transform.rotation = Quaternion.identity;
             CurrentZombiesAlive.Add(zombie);
-
 
             yield return new WaitForSeconds(SpawnDelay);
         }
@@ -78,12 +68,10 @@ public class ZombieSpawnerController : MonoBehaviour
 
         foreach (Enemy zombie in CurrentZombiesAlive)
         {
-            if(zombie.isDead)
+            if (zombie.isDead)
             {
                 zombiesToRemove.Add(zombie);
-
-                zombiePool.ReturnToPool(zombie);
-
+                StartCoroutine(ReturnZombieToPoolAfterDelay(zombie, 2.5f));
             }
         }
 
@@ -94,8 +82,7 @@ public class ZombieSpawnerController : MonoBehaviour
 
         zombiesToRemove.Clear();
 
-
-        if(CurrentZombiesAlive.Count == 0 && InCooldown == false)
+        if (CurrentZombiesAlive.Count == 0 && !InCooldown)
         {
             StartCoroutine(WaveCooldown());
         }
@@ -103,12 +90,18 @@ public class ZombieSpawnerController : MonoBehaviour
         if (InCooldown)
         {
             CooldownTimer -= Time.deltaTime;
+            if (CooldownTimer <= 0)
+            {
+                InCooldown = false;
+                WaveOverUI.gameObject.SetActive(false);
+                CurrentZombiesPerWave *= 2;
+                StartNextWave();
+            }
         }
         else
         {
             CooldownTimer = waveCooldown;
         }
-
 
         CountdownTimerUI.text = CooldownTimer.ToString("F0");
     }
@@ -117,16 +110,17 @@ public class ZombieSpawnerController : MonoBehaviour
     {
         InCooldown = true;
         WaveOverUI.gameObject.SetActive(true);
+        CooldownTimer = waveCooldown;
 
         yield return new WaitForSeconds(waveCooldown);
 
-        InCooldown = false;
-        WaveOverUI.gameObject.SetActive(false);
-
-        CurrentZombiesPerWave *= 2;
-        StartNextWave();
+        // This section is moved to Update to avoid immediate next wave start.
     }
 
-
-
+    private IEnumerator ReturnZombieToPoolAfterDelay(Enemy zombie, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        zombiePool.ReturnToPool(zombie);
+        zombie.isDead = false;
+    }
 }

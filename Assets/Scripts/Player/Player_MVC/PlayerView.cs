@@ -30,7 +30,7 @@ public class PlayerView : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
 
         characterController = GetComponent<CharacterController>();
         model = new PlayerModel();
@@ -80,7 +80,7 @@ public class PlayerView : MonoBehaviour
     private IEnumerator ShowGameOverUI()
     {
         yield return new WaitForSeconds(1f);
-        GameOverUI.gameObject.SetActive(true);
+        GameOverUI.gameObject.SetActive(true); 
 
         int waveSurvived = ServiceLocator.Instance.GlobalReference.WaveNumber;
 

@@ -7,12 +7,6 @@ public class Bullet : MonoBehaviour
 {
     public float BulletDamage;
 
-    private ObjectPool<Bullet> pool;
-
-    public void SetPool(ObjectPool<Bullet> pool)
-    {
-        this.pool = pool;
-    }
 
     private void OnCollisionEnter(Collision ObjectWeHit)
     {
@@ -21,14 +15,14 @@ public class Bullet : MonoBehaviour
             ObjectWeHit.gameObject.CompareTag("Enemy"))
         {
             HandleCollision(ObjectWeHit);
-            pool.ReturnToPool(this);
+            Destroy(gameObject);
         }
     }
 
     private void HandleCollision(Collision ObjectWeHit)
     {
         if (ObjectWeHit.gameObject.CompareTag("Target"))
-        {          
+        {
             CreateBulletImpactEffect(ObjectWeHit);
         }
         else if (ObjectWeHit.gameObject.CompareTag("Wall"))
@@ -66,7 +60,7 @@ public class Bullet : MonoBehaviour
             ServiceLocator.Instance.GlobalReference.BulletImpactEffectPrefab,
             contact.point,
             Quaternion.LookRotation(contact.normal)
-            ); 
+            );
         hole.transform.SetParent(ObjectWeHit.gameObject.transform);
     }
 

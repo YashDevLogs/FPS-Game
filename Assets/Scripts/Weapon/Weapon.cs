@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
     [Header("Bullet")]
     public Bullet BulletPrefab;
     public Transform BulletSpawn;
-    public float BulletVelocity = 30f ;
+    public float BulletVelocity = 30f;
     public float BulletPrefabLifespan = 3f;
     public float WeaponDamage;
 
@@ -47,7 +47,7 @@ public class Weapon : MonoBehaviour
     public Vector3 SpawnPosition;
     public Vector3 SpawnRotation;
 
-    public ObjectPool<Bullet> bulletPool;
+    /*    public ObjectPool<Bullet> bulletPool;*/
 
     public enum ShootingMode
     {
@@ -67,7 +67,7 @@ public class Weapon : MonoBehaviour
 
         SpreadIntensity = hipSpreadIntensity;
 
-        bulletPool = new ObjectPool<Bullet>(BulletPrefab, 15);
+        /*        bulletPool = new ObjectPool<Bullet>(BulletPrefab, 30);*/
     }
 
 
@@ -77,14 +77,14 @@ public class Weapon : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                
+
                 EnterADS();
             }
 
 
             if (Input.GetMouseButtonUp(1))
             {
-                
+
                 ExitADS();
             }
 
@@ -154,19 +154,24 @@ public class Weapon : MonoBehaviour
         {
             animator.SetTrigger("RECOIL");
         }
-       
+
         CartridgeEjectEffecst.GetComponent<ParticleSystem>().Play();
 
         ReadyToShoot = false;
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
 
-        Bullet bullet = bulletPool.Get();
-        bullet.transform.position = BulletSpawn.position;
+        Bullet bullet = Instantiate(BulletPrefab, BulletSpawn.position, Quaternion.identity);
+
+        Bullet bul = bullet.GetComponent<Bullet>();
+        bul.BulletDamage = WeaponDamage;
+
         bullet.transform.forward = shootingDirection;
-        bullet.BulletDamage = WeaponDamage;
-        bullet.GetComponent<Rigidbody>().velocity = shootingDirection * BulletVelocity;
-        bullet.SetPool(bulletPool);
+
+        bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * BulletVelocity, ForceMode.Impulse);
+
+        StartCoroutine(DestroyBulletAfterTime(bullet, BulletPrefabLifespan));
+
 
         if (AllowReset)
         {
@@ -174,7 +179,7 @@ public class Weapon : MonoBehaviour
             AllowReset = false;
         }
 
-        if(CurrentShootingMode == ShootingMode.Burst && BurstBulletsLeft > 1)
+        if (CurrentShootingMode == ShootingMode.Burst && BurstBulletsLeft > 1)
         {
             BurstBulletsLeft--;
             Invoke("FireWeapon", ShootingDelay);
@@ -192,15 +197,15 @@ public class Weapon : MonoBehaviour
 
     private void ReloadComplete()
     {
-       if(ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > MagzineSize)
+        if (ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > MagzineSize)
         {
             BulletsLeft = MagzineSize;
             ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
         }
-        else 
+        else
         {
-                BulletsLeft = ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel);
-                ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);         
+            BulletsLeft = ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel);
+            ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
         }
 
         IsReloading = false;
@@ -217,7 +222,7 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
 
         Vector3 targetPoint;
-        if(Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit))
         {
             targetPoint = hit.point;
         }
@@ -233,7 +238,7 @@ public class Weapon : MonoBehaviour
 
         return direction + new Vector3(0, y, z);
     }
-    private IEnumerator DestroyBulletAfterTime(GameObject bullet, float bulletPrefabLifespan)
+    private IEnumerator DestroyBulletAfterTime(Bullet bullet, float bulletPrefabLifespan)
     {
         yield return new WaitForSeconds(bulletPrefabLifespan);
         Destroy(bullet);
