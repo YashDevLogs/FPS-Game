@@ -6,10 +6,10 @@ public class MainMenu : MonoBehaviour
 {
     string NewGameScene = "LEVEL";
 
-    public TextMeshProUGUI HighScoreUI;
+    [SerializeField] private TextMeshProUGUI HighScoreUI;
 
-    public AudioClip BgMusic;
-    public AudioSource MainMenuChannel;
+    [SerializeField] private AudioClip BgMusic;
+    [SerializeField] private AudioSource MainMenuChannel;
 
     private void Start()
     {

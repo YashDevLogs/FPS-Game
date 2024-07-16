@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
 {
-    public float MouseSensitivity = 100f;
-    public float TopClamp = -90f;
-    public float BottomClamp = 90f;
-
-    private float xRotation = 0f;
-    private float yRotation = 0f;
-
     private PlayerModel model;
     private PlayerController controller;
     private CharacterController characterController;
 
-
-
     public Animator CameraAnim;
-    public GameObject BloodScreenOverlay;
+    [SerializeField] private GameObject BloodScreenOverlay;
 
     public TextMeshProUGUI HeathUI;
-    public GameObject GameOverUI;
+    [SerializeField] private GameObject GameOverUI;
 
     public Transform GroundCheck;
+
+    private float bloodScreenTimer;
+    private float bloodScreenDuration = 1.5f;
+    private bool showBloodScreenEffect;
+    private bool gameOverTriggered;
+
+    private Image bloodScreenImage;
 
     void Start()
     {
@@ -34,108 +30,114 @@ public class PlayerView : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         model = new PlayerModel();
-        controller = new PlayerController(model, characterController, this , transform, GroundCheck);
-        
+        controller = new PlayerController(model, characterController, this, transform, GroundCheck);
+
         HeathUI.text = $"Health: {model.Health}";
+
+        // Cache the Image component
+        bloodScreenImage = BloodScreenOverlay.GetComponentInChildren<Image>();
     }
 
     void Update()
     {
-        
         HandleMouseMovement();
         controller.HandleMovement();
         controller.UpdatePlayerState();
+
+        UpdateBloodScreenEffect();
+        CheckGameOver();
     }
 
     void HandleMouseMovement()
     {
-        float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * model.MouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * model.MouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, TopClamp, BottomClamp);
+        model.xRotation -= mouseY;
+        model.xRotation = Mathf.Clamp(model.xRotation, model.TopClamp, model.BottomClamp);
 
-        yRotation += mouseX;
+        model.yRotation += mouseX;
 
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        transform.localRotation = Quaternion.Euler(model.xRotation, model.yRotation, 0f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("ZombieHand"))
+        ZombieHandDamage zombieHandDamage = other.GetComponent<ZombieHandDamage>();
+        if (zombieHandDamage != null)
         {
-            if(controller.isDead == false )
+            if (!model.isDead)
             {
-                controller.TakeDamage(other.gameObject.GetComponent<ZombieHandDamage>().damage);
-                StartCoroutine(BloodScreenEffect());
-            }else if(controller.isDead) 
-            {
-                StartCoroutine(ShowGameOverUI());
-
+                controller.TakeDamage(zombieHandDamage.damage);
+                StartBloodScreenEffect();
             }
-
+            else if (model.isDead && !gameOverTriggered)
+            {
+                gameOverTriggered = true;
+                ShowGameOverUI();
+            }
         }
     }
 
-    private IEnumerator ShowGameOverUI()
+    private void ShowGameOverUI()
     {
-        yield return new WaitForSeconds(1f);
-        GameOverUI.gameObject.SetActive(true); 
+        GameOverUI.gameObject.SetActive(true);
 
         int waveSurvived = ServiceLocator.Instance.GlobalReference.WaveNumber;
 
-        if(waveSurvived - 1 > SaveLoadManager.Instance.LoadHighScore())
+        if (waveSurvived - 1 > SaveLoadManager.Instance.LoadHighScore())
         {
             SaveLoadManager.Instance.SaveHighScore(waveSurvived - 1);
         }
-        StartCoroutine(ReturnToMenu());
+
+        Invoke(nameof(ReturnToMenu), 3f); // Delayed return to menu
     }
 
-    private IEnumerator ReturnToMenu()
+    private void ReturnToMenu()
     {
-        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("MainMenu");
     }
 
-    public IEnumerator BloodScreenEffect()
+    public void StartBloodScreenEffect()
     {
-        if (BloodScreenOverlay.activeInHierarchy == false)
+        if (!BloodScreenOverlay.activeInHierarchy)
         {
             BloodScreenOverlay.SetActive(true);
         }
 
-
-        var image = BloodScreenOverlay.GetComponentInChildren<Image>();
-
         // Set the initial alpha value to 1 (fully visible).
-        Color startColor = image.color;
+        Color startColor = bloodScreenImage.color;
         startColor.a = 1f;
-        image.color = startColor;
+        bloodScreenImage.color = startColor;
 
-        float duration = 1.5f;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            // Calculate the new alpha value using Lerp.
-            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
-
-            // Update the color with the new alpha value.
-            Color newColor = image.color;
-            newColor.a = alpha;
-            image.color = newColor;
-
-            // Increment the elapsed time.
-            elapsedTime += Time.deltaTime;
-
-            yield return null; ; // Wait for the next frame.
-        }
-
-
-        if (BloodScreenOverlay.activeInHierarchy)
-        {
-            BloodScreenOverlay.SetActive(false);
-        }
+        bloodScreenTimer = bloodScreenDuration;
+        showBloodScreenEffect = true;
     }
 
+    private void UpdateBloodScreenEffect()
+    {
+        if (showBloodScreenEffect)
+        {
+            bloodScreenTimer -= Time.deltaTime;
+
+            float alpha = Mathf.Lerp(0f, 1f, bloodScreenTimer / bloodScreenDuration);
+            Color newColor = bloodScreenImage.color;
+            newColor.a = alpha;
+            bloodScreenImage.color = newColor;
+
+            if (bloodScreenTimer <= 0)
+            {
+                showBloodScreenEffect = false;
+                BloodScreenOverlay.SetActive(false);
+            }
+        }
+    }
+    private void CheckGameOver()
+    {
+        if (model.isDead && !gameOverTriggered)
+        {
+            gameOverTriggered = true;
+            ShowGameOverUI();
+        }
+    }
 }

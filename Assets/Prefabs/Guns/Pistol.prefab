@@ -16665,27 +16665,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c948762043b46fe4b95e9eb0c8124d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActiveWeapon: 0
+  IsActiveWeapon: 0
   isADS: 0
-  IsShooting: 0
-  ReadyToShoot: 0
-  ShootingDelay: 0.4
-  BulletsPerBurst: 1
-  BurstBulletsLeft: 0
-  SpreadIntensity: 0
+  isShooting: 0
+  readyToShoot: 0
+  allowReset: 1
+  shootingDelay: 0.5
+  bulletsPerBurst: 1
+  burstBulletsLeft: 0
+  spreadIntensity: 0
   hipSpreadIntensity: 0.4
   adsSpreadIntensity: 0.01
-  BulletPrefab: {fileID: 8157886435198327027, guid: 459dc8d027c94ba4f981fc54e370d367,
+  bulletPrefab: {fileID: 8157886435198327027, guid: 459dc8d027c94ba4f981fc54e370d367,
     type: 3}
-  BulletSpawn: {fileID: 7355847685047060316}
-  BulletVelocity: 500
-  BulletPrefabLifespan: 3
-  WeaponDamage: 25
+  bulletSpawn: {fileID: 7355847685047060316}
+  bulletVelocity: 30
+  bulletPrefabLifespan: 3
+  weaponDamage: 25
   MuzzleEffect: {fileID: 990664044746975938}
   CartridgeEjectEffecst: {fileID: 4097664601049601792}
   ReloadTime: 1.5
   MagzineSize: 12
-  BulletsLeft: 0
+  bulletsLeft: 0
   IsReloading: 0
   SpawnPosition: {x: -0.023, y: 0.386, z: 0.078}
   SpawnRotation: {x: 99.6629, y: 599.203, z: 380.224}

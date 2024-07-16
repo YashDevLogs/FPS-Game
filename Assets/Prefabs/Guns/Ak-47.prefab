@@ -4836,7 +4836,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 44
+      scalar: 10
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10715,27 +10715,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c948762043b46fe4b95e9eb0c8124d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActiveWeapon: 0
+  IsActiveWeapon: 0
   isADS: 0
-  IsShooting: 0
-  ReadyToShoot: 0
-  ShootingDelay: 0.12
-  BulletsPerBurst: 1
-  BurstBulletsLeft: 0
-  SpreadIntensity: 0.1
+  isShooting: 0
+  readyToShoot: 0
+  allowReset: 1
+  shootingDelay: 0.1
+  bulletsPerBurst: 1
+  burstBulletsLeft: 0
+  spreadIntensity: 0
   hipSpreadIntensity: 0
   adsSpreadIntensity: 0
-  BulletPrefab: {fileID: -2316835761503524621, guid: f96a9ba247225424ba74bd59e8db102d,
+  bulletPrefab: {fileID: -2316835761503524621, guid: f96a9ba247225424ba74bd59e8db102d,
     type: 3}
-  BulletSpawn: {fileID: 5664324865210367466}
-  BulletVelocity: 700
-  BulletPrefabLifespan: 3
-  WeaponDamage: 33.4
+  bulletSpawn: {fileID: 5664324865210367466}
+  bulletVelocity: 30
+  bulletPrefabLifespan: 3
+  weaponDamage: 33.4
   MuzzleEffect: {fileID: 1237939835754181684}
   CartridgeEjectEffecst: {fileID: 4765364075070213711}
   ReloadTime: 2
   MagzineSize: 30
-  BulletsLeft: 0
+  bulletsLeft: 0
   IsReloading: 0
   SpawnPosition: {x: -0.06, y: 0.369, z: 0.14}
   SpawnRotation: {x: 81.524, y: 418.853, z: 201.771}

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class InteractionManager
 {
-    public Weapon hoveredWeapon = null;
-    public AmmoBox hoveredAmmoBox = null;
-    public Throwable hoveredThrowable = null;
+    private Weapon hoveredWeapon = null;
+    private AmmoBox hoveredAmmoBox = null;
+    private Throwable hoveredThrowable = null;
 
     public void Update()
     {
@@ -16,7 +16,7 @@ public class InteractionManager
             GameObject objectHitByRayCast = hit.transform.gameObject;
 
             //Weapons
-            if (objectHitByRayCast.GetComponent<Weapon>() && objectHitByRayCast.GetComponent<Weapon>().isActiveWeapon == false)
+            if (objectHitByRayCast.GetComponent<Weapon>() && objectHitByRayCast.GetComponent<Weapon>().IsActiveWeapon == false)
             {
                 if (hoveredWeapon)
                 {

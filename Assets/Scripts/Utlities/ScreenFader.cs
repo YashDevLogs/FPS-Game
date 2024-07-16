@@ -4,8 +4,8 @@ using System.Collections;
 
 public class ScreenFader : GenericMonoSingleton<ScreenFader>
 {
-    public Image fadeImage;
-    public float fadeDuration = 7.0f;
+    [SerializeField] private Image fadeImage;
+    [SerializeField] private float fadeDuration = 7.0f;
 
     public void StartFade()
     {

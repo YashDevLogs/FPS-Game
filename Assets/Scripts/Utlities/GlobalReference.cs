@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,7 +5,6 @@ using UnityEngine.UI;
 
 public class GlobalReference : MonoBehaviour
 {
-
     public GameObject BulletImpactEffectPrefab;
     public GameObject grenadeExplosionEffect;
 
@@ -39,5 +37,8 @@ public class GlobalReference : MonoBehaviour
     public GameObject middleAim;
 
     public int WaveNumber;
+
+    public Transform PlayerTransfrom;
+    public List<Transform> WayPoints;
 
 }

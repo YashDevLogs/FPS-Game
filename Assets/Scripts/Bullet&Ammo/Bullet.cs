@@ -5,39 +5,35 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float BulletDamage;
-
+    public float BulletDamage; // reference for Weapon Manager
 
     private void OnCollisionEnter(Collision ObjectWeHit)
     {
-        if (ObjectWeHit.gameObject.CompareTag("Target") ||
-            ObjectWeHit.gameObject.CompareTag("Wall") ||
-            ObjectWeHit.gameObject.CompareTag("Enemy"))
+        Enemy enemy = ObjectWeHit.gameObject.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            HandleCollision(ObjectWeHit);
-            Destroy(gameObject);
+            HandleEnemyCollision(ObjectWeHit, enemy);
         }
+        else
+        {
+            HandleGeneralCollision(ObjectWeHit);
+        }
+
+        Destroy(gameObject);
     }
 
-    private void HandleCollision(Collision ObjectWeHit)
+    private void HandleEnemyCollision(Collision ObjectWeHit, Enemy enemy)
     {
-        if (ObjectWeHit.gameObject.CompareTag("Target"))
+        if (!enemy.isDead)
         {
-            CreateBulletImpactEffect(ObjectWeHit);
+            enemy.TakeDamage(BulletDamage);
         }
-        else if (ObjectWeHit.gameObject.CompareTag("Wall"))
-        {
-            CreateBulletImpactEffect(ObjectWeHit);
-        }
-        else if (ObjectWeHit.gameObject.CompareTag("Enemy"))
-        {
-            Enemy enemy = ObjectWeHit.gameObject.GetComponent<Enemy>();
-            if (!enemy.isDead)
-            {
-                enemy.TakeDamage(BulletDamage);
-            }
-            CreateBloodSprayEffect(ObjectWeHit);
-        }
+        CreateBloodSprayEffect(ObjectWeHit);
+    }
+
+    private void HandleGeneralCollision(Collision ObjectWeHit)
+    {
+        CreateBulletImpactEffect(ObjectWeHit);
     }
 
     private void CreateBloodSprayEffect(Collision ObjectWeHit)
@@ -48,7 +44,7 @@ public class Bullet : MonoBehaviour
             ServiceLocator.Instance.GlobalReference.BloodSprayEffect,
             contact.point,
             Quaternion.LookRotation(contact.normal)
-            );
+        );
         BloodSprayPrefab.transform.SetParent(ObjectWeHit.gameObject.transform);
     }
 
@@ -60,8 +56,7 @@ public class Bullet : MonoBehaviour
             ServiceLocator.Instance.GlobalReference.BulletImpactEffectPrefab,
             contact.point,
             Quaternion.LookRotation(contact.normal)
-            );
+        );
         hole.transform.SetParent(ObjectWeHit.gameObject.transform);
     }
-
 }

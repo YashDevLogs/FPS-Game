@@ -1,18 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ZombieAttackState : StateMachineBehaviour
 {
-    Transform player;
-    NavMeshAgent agent;
+     private Transform player;
+    private NavMeshAgent agent;
 
-    public float StopAttackingDistance = 2f;
+    private float StopAttackingDistance = 2f;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = ServiceLocator.Instance.GlobalReference.PlayerTransfrom;
         agent = animator.GetComponent<NavMeshAgent>();
     }
 
@@ -38,7 +35,6 @@ public class ZombieAttackState : StateMachineBehaviour
         {
             animator.SetBool("isAttacking", false);
         }
-
     }
 
     private void LookAtPlayer()
@@ -52,9 +48,7 @@ public class ZombieAttackState : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
         ServiceLocator.Instance.SoundManager.ZombieChannel.Stop();
-
     }
 
 

@@ -1,18 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Throwable : MonoBehaviour
 {
-    [SerializeField] float delay = 3f;
-    [SerializeField] float damageRadius = 10f;
-    [SerializeField] float explosionForce = 1200f;
+    [SerializeField] private float delay = 3f;
+    [SerializeField] private float damageRadius = 10f;
+    [SerializeField] private float explosionForce = 1200f;
 
-    float countdown;
+    private float countdown;
 
-    bool hasExploded = false;
-    public bool hasBeenThrown = false;
+    private bool hasExploded = false;
+    public bool HasBeenThrown = false; // need referenece of this bool in Weapon Manager.
+
 
     public enum ThrowableType
     {
@@ -28,7 +26,7 @@ public class Throwable : MonoBehaviour
 
     private void Update()
     {
-        if (hasBeenThrown)
+        if (HasBeenThrown)
         {
             countdown-= Time.deltaTime;
             if(countdown <= 0f && !hasExploded )
@@ -77,8 +75,7 @@ public class Throwable : MonoBehaviour
                 if(objectInRange.gameObject.GetComponent<Enemy>().isDead == false)
                 {
                     objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(100);
-                }
-                
+                }                
             }
         }
     }

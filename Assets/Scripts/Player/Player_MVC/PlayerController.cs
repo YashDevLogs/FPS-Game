@@ -1,20 +1,14 @@
-﻿using UnityEngine.UI;
-using System.Collections;
+﻿using Assets.Scripts.Utlities;
 using UnityEngine;
 
-public class PlayerController  
+public class PlayerController  :IDamageable
 {
     private PlayerModel model;
     private CharacterController controller;
     private PlayerView playerView;
     private Transform playerTransform;
     private Transform groundCheck;
-
     private Vector3 lastPosition;
-
-    public bool isDead = false;
-
-
 
     public PlayerController(PlayerModel model, CharacterController controller,PlayerView playerView, Transform playerTransform, Transform groundCheck)
     {
@@ -91,7 +85,6 @@ public class PlayerController
         this.playerView.enabled = false;
         playerView.HeathUI.gameObject.SetActive(false);
         ScreenFader.Instance.StartFade();
-        isDead = true;
+        model.isDead = true;
     }
-
 }

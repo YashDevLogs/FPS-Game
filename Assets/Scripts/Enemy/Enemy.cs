@@ -1,17 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Utlities;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour , IDamageable
 {
-    public float Health = 100f;
+    [SerializeField] private float Health = 100f;
     private Animator ZombieAnim;
     public bool isDead = false;
 
     private NavMeshAgent navAgent;
+
+
 
     void Start()
     {
@@ -20,13 +20,11 @@ public class Enemy : MonoBehaviour
     }
 
     public void TakeDamage(float damageAmt)
-    {
-        
+    {        
        Health -= damageAmt;
 
         if (Health <= 0)
-        {
-            
+        {            
             int randomValue = Random.Range(0, 2);
 
             if (randomValue == 0)
@@ -40,16 +38,11 @@ public class Enemy : MonoBehaviour
             isDead = true;
 
             ServiceLocator.Instance.SoundManager.ZombieChannel2.PlayOneShot(ServiceLocator.Instance.SoundManager.ZombieDeath);
-
         }
         else 
         {
             ZombieAnim.SetTrigger("DAMAGE");
             ServiceLocator.Instance.SoundManager.ZombieChannel2.PlayOneShot(ServiceLocator.Instance.SoundManager.ZombieHurt);
-
         }
     }
-
-
-
 }

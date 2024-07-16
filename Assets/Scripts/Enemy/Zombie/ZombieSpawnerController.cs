@@ -2,32 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
 using Random = UnityEngine.Random;
 
 public class ZombieSpawnerController : MonoBehaviour
 {
-    public int InitialZombiesPerWave = 5;
-    public int CurrentZombiesPerWave;
+    private int InitialZombiesPerWave = 5;
+    private int CurrentZombiesPerWave;
 
-    public float SpawnDelay = 0.5f;
+    [SerializeField] private float SpawnDelay = 0.5f;
 
-    public int CurrentWave = 0;
+    [SerializeField] private int CurrentWave = 0;
 
-    public float waveCooldown = 10f;
+    [SerializeField] private float waveCooldown = 10f;
 
-    public bool InCooldown;
-    public float CooldownTimer = 0f;
+    [SerializeField] private bool InCooldown;
+    [SerializeField] private float CooldownTimer = 0f;
 
-    public List<Enemy> CurrentZombiesAlive;
+    [SerializeField] private List<Enemy> CurrentZombiesAlive;
 
-    public Enemy ZombiePrefab;
+    [SerializeField] private Enemy ZombiePrefab;
 
-    public TextMeshProUGUI WaveOverUI;
-    public TextMeshProUGUI CountdownTimerUI;
-    public TextMeshProUGUI CurrentWaveUI;
+    [SerializeField] private TextMeshProUGUI WaveOverUI;
+    [SerializeField] private TextMeshProUGUI CountdownTimerUI;
+    [SerializeField] private TextMeshProUGUI CurrentWaveUI;
 
-    public ObjectPool<Enemy> zombiePool;
+    [SerializeField] private ObjectPool<Enemy> zombiePool;
 
     private void Start()
     {

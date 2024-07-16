@@ -7,47 +7,49 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("Activ Weapon")]
-    public bool isActiveWeapon;
+    public bool IsActiveWeapon; // Needs to be modified in Weapon Manager if the weapon is Active or Inactive
 
     [Header("ADS")]
-    public bool isADS;
+    [SerializeField] private bool isADS;
 
     [Header("Shooting")]
-    public bool IsShooting, ReadyToShoot;
-    bool AllowReset = true;
-    public float ShootingDelay = 2f;
+    [SerializeField] private bool isShooting, readyToShoot;
+    [SerializeField] private bool allowReset = true;
+    [SerializeField] private float shootingDelay = 2f;
 
     [Header("Burst")]
-    public int BulletsPerBurst = 4;
-    public int BurstBulletsLeft;
+    [SerializeField] private int bulletsPerBurst = 4;
+    [SerializeField] private int burstBulletsLeft;
+    public int BulletsPerBurst => bulletsPerBurst; // Needs to be updated in HUD manager
 
     [Header("Spread Intensity")]
-    public float SpreadIntensity;
-    public float hipSpreadIntensity;
-    public float adsSpreadIntensity;
+    [SerializeField] private float spreadIntensity;
+    [SerializeField] private float hipSpreadIntensity;
+    [SerializeField] private float adsSpreadIntensity;
 
     [Header("Bullet")]
-    public Bullet BulletPrefab;
-    public Transform BulletSpawn;
-    public float BulletVelocity = 30f;
-    public float BulletPrefabLifespan = 3f;
-    public float WeaponDamage;
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private Transform bulletSpawn;
+    [SerializeField] private float bulletVelocity = 30f;
+    [SerializeField] private float bulletPrefabLifespan = 3f;
+    [SerializeField] private float weaponDamage;
 
     [Header("Effects")]
-    public GameObject MuzzleEffect;
-    public GameObject CartridgeEjectEffecst;
-    internal Animator animator;
+    [SerializeField] private GameObject MuzzleEffect;
+    [SerializeField] private GameObject CartridgeEjectEffecst;
+    internal Animator animator; // Weapon Manager use to enable animator if its an active weapon
 
     [Header("Reload")]
-    public float ReloadTime;
-    public int MagzineSize, BulletsLeft;
-    public bool IsReloading;
+    [SerializeField] private float ReloadTime;
+    [SerializeField] private int MagzineSize, bulletsLeft;
+    [SerializeField] private bool IsReloading;
+
+    public int BulletsLeft => bulletsLeft; // Needs to be updated in HUD manager
 
     [Header("Spawn Position")]
     public Vector3 SpawnPosition;
     public Vector3 SpawnRotation;
 
-    /*    public ObjectPool<Bullet> bulletPool;*/
 
     public enum ShootingMode
     {
@@ -60,20 +62,19 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        ReadyToShoot = true;
-        BurstBulletsLeft = BulletsPerBurst;
+        readyToShoot = true;
+        burstBulletsLeft = BulletsPerBurst;
         animator = GetComponent<Animator>();
-        BulletsLeft = MagzineSize;
+        bulletsLeft = MagzineSize;
 
-        SpreadIntensity = hipSpreadIntensity;
+        spreadIntensity = hipSpreadIntensity;
 
-        /*        bulletPool = new ObjectPool<Bullet>(BulletPrefab, 30);*/
     }
 
 
     void Update()
     {
-        if (isActiveWeapon)
+        if (IsActiveWeapon)
         {
             if (Input.GetMouseButtonDown(1))
             {
@@ -89,33 +90,33 @@ public class Weapon : MonoBehaviour
             }
 
             GetComponent<Outline>().enabled = false;
-            if (BulletsLeft == 0 && IsShooting)
+            if (bulletsLeft == 0 && isShooting)
             {
                 ServiceLocator.Instance.SoundManager.EmptyMagzine.Play();
             }
 
             if (CurrentShootingMode == ShootingMode.Auto)
             {
-                IsShooting = Input.GetKey(KeyCode.Mouse0);
+                isShooting = Input.GetKey(KeyCode.Mouse0);
             }
             else if (CurrentShootingMode == ShootingMode.Single || CurrentShootingMode == ShootingMode.Burst)
             {
-                IsShooting = Input.GetKeyDown(KeyCode.Mouse0);
+                isShooting = Input.GetKeyDown(KeyCode.Mouse0);
             }
 
-            if (Input.GetKeyDown(KeyCode.R) && BulletsLeft < MagzineSize && !IsReloading && ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > 0)
+            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < MagzineSize && !IsReloading && ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > 0)
             {
                 Reload();
             }
-            if (ReadyToShoot && !IsShooting && !IsReloading && BulletsLeft == 0 && ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > 0)
+            if (readyToShoot && !isShooting && !IsReloading && bulletsLeft == 0 && ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > 0)
             {
                 Reload();
             }
 
 
-            if (ReadyToShoot && IsShooting && BulletsLeft > 0)
+            if (readyToShoot && isShooting && bulletsLeft > 0)
             {
-                BurstBulletsLeft = BulletsPerBurst;
+                burstBulletsLeft = BulletsPerBurst;
                 FireWeapon();
 
             }
@@ -128,7 +129,7 @@ public class Weapon : MonoBehaviour
         Camera.main.fieldOfView = 40;
         animator.SetTrigger("ADS_enter");
         isADS = true;
-        SpreadIntensity = adsSpreadIntensity;
+        spreadIntensity = adsSpreadIntensity;
     }
 
     private void ExitADS()
@@ -141,7 +142,7 @@ public class Weapon : MonoBehaviour
 
     private void FireWeapon()
     {
-        BulletsLeft--;
+        bulletsLeft--;
         MuzzleEffect.GetComponent<ParticleSystem>().Play();
 
         ServiceLocator.Instance.SoundManager.PlayShootingSound(ThisWeaponModel);
@@ -157,32 +158,32 @@ public class Weapon : MonoBehaviour
 
         CartridgeEjectEffecst.GetComponent<ParticleSystem>().Play();
 
-        ReadyToShoot = false;
+        readyToShoot = false;
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
 
-        Bullet bullet = Instantiate(BulletPrefab, BulletSpawn.position, Quaternion.identity);
+        Bullet bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
 
         Bullet bul = bullet.GetComponent<Bullet>();
-        bul.BulletDamage = WeaponDamage;
+        bul.BulletDamage = weaponDamage;
 
         bullet.transform.forward = shootingDirection;
 
-        bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * BulletVelocity, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletVelocity, ForceMode.Impulse);
 
-        StartCoroutine(DestroyBulletAfterTime(bullet, BulletPrefabLifespan));
+        StartCoroutine(DestroyBulletAfterTime(bullet, bulletPrefabLifespan));
 
 
-        if (AllowReset)
+        if (allowReset)
         {
-            Invoke("ResetShot", ShootingDelay);
-            AllowReset = false;
+            Invoke("ResetShot", shootingDelay);
+            allowReset = false;
         }
 
-        if (CurrentShootingMode == ShootingMode.Burst && BurstBulletsLeft > 1)
+        if (CurrentShootingMode == ShootingMode.Burst && burstBulletsLeft > 1)
         {
-            BurstBulletsLeft--;
-            Invoke("FireWeapon", ShootingDelay);
+            burstBulletsLeft--;
+            Invoke("FireWeapon", shootingDelay);
         }
     }
 
@@ -199,21 +200,21 @@ public class Weapon : MonoBehaviour
     {
         if (ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel) > MagzineSize)
         {
-            BulletsLeft = MagzineSize;
-            ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
+            bulletsLeft = MagzineSize;
+            ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(bulletsLeft, ThisWeaponModel);
         }
         else
         {
-            BulletsLeft = ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel);
-            ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(BulletsLeft, ThisWeaponModel);
+            bulletsLeft = ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(ThisWeaponModel);
+            ServiceLocator.Instance.WeaponManager.DecreaseTotalAmmo(bulletsLeft, ThisWeaponModel);
         }
 
         IsReloading = false;
     }
     private void ResetShot()
     {
-        ReadyToShoot = true;
-        AllowReset = true;
+        readyToShoot = true;
+        allowReset = true;
     }
 
     public Vector3 CalculateDirectionAndSpread()
@@ -231,10 +232,10 @@ public class Weapon : MonoBehaviour
             targetPoint = ray.GetPoint(100);
         }
 
-        Vector3 direction = targetPoint - BulletSpawn.position;
+        Vector3 direction = targetPoint - bulletSpawn.position;
 
-        float z = UnityEngine.Random.Range(-SpreadIntensity, SpreadIntensity);
-        float y = UnityEngine.Random.Range(-SpreadIntensity, SpreadIntensity);
+        float z = UnityEngine.Random.Range(-spreadIntensity, spreadIntensity);
+        float y = UnityEngine.Random.Range(-spreadIntensity, spreadIntensity);
 
         return direction + new Vector3(0, y, z);
     }

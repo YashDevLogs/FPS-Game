@@ -1,18 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ZombiePatrolState : StateMachineBehaviour
 {
-    float timer;
-    public float PatrolTimer = 0f;
+    private float timer;
+    [SerializeField] private float PatrolTimer = 0f;
 
-    Transform player;
-    NavMeshAgent agent;
+    private Transform player;
+    private NavMeshAgent agent;
 
-    public float DetectionArea = 18f;
-    public float PatrolSpeed = 2f;
+    [SerializeField] private float DetectionArea = 18f;
+    [SerializeField] private float PatrolSpeed = 2f;
 
     List<Transform> waypoints = new List<Transform>();
 
@@ -23,10 +22,9 @@ public class ZombiePatrolState : StateMachineBehaviour
         {
             ServiceLocator.Instance.SoundManager.ZombieChannel.clip = ServiceLocator.Instance.SoundManager.ZombieWalking;
             ServiceLocator.Instance.SoundManager.ZombieChannel.PlayDelayed(1f);
-
         }
 
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = ServiceLocator.Instance.GlobalReference.PlayerTransfrom;
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = PatrolSpeed;
         timer = 0;
@@ -72,6 +70,5 @@ public class ZombiePatrolState : StateMachineBehaviour
         agent.SetDestination(agent.transform.position);
 
         ServiceLocator.Instance.SoundManager.ZombieChannel.Stop();
-
     }
 }

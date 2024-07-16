@@ -3879,26 +3879,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6972198, y: 3.0917978, z: 0.07047788}
   m_Center: {x: -0.8486099, y: 1.5541012, z: -0.035238896}
---- !u!1 &229084614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3013418586432387829, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3307811984655056235}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &229084619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229084614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54cdbe2ed60489643b47948f2d43a3df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeImage: {fileID: 1545032363}
-  fadeDuration: 3
 --- !u!64 &235651708
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9250,8 +9230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4011fa1dc42de7143863a4ba935cb6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalReference: {fileID: 805082283}
-  SoundManager: {fileID: 1124723444}
+  globalReference: {fileID: 805082283}
+  soundManager: {fileID: 1124723444}
 --- !u!4 &495613649
 Transform:
   m_ObjectHideFlags: 0
@@ -14283,6 +14263,7 @@ MonoBehaviour:
   emptySlot: {fileID: 21300000, guid: 43b37fd46a033c447b21a3d7fa2a3d75, type: 3}
   middleAim: {fileID: 1506928708}
   WaveNumber: 0
+  PlayerTransfrom: {fileID: 1510506935}
 --- !u!205 &805644192
 LODGroup:
   m_ObjectHideFlags: 0
@@ -19694,124 +19675,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1012220806}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1012940200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1012940201}
-  - component: {fileID: 1012940203}
-  - component: {fileID: 1012940202}
-  m_Layer: 0
-  m_Name: Point Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1012940201
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012940200}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.484, z: 0.393}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3307811984655056236}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1012940202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012940200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
---- !u!108 &1012940203
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012940200}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 0
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 18.3
-  m_Range: 500
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
 --- !u!33 &1013021638
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -24947,7 +24810,7 @@ MonoBehaviour:
   delay: 3
   damageRadius: 20
   explosionForce: 1200
-  hasBeenThrown: 0
+  HasBeenThrown: 0
   throwableType: 0
 --- !u!114 &1160423212
 MonoBehaviour:
@@ -25390,7 +25253,7 @@ MonoBehaviour:
   delay: 3
   damageRadius: 20
   explosionForce: 1200
-  hasBeenThrown: 0
+  HasBeenThrown: 0
   throwableType: 0
 --- !u!114 &1216922078
 MonoBehaviour:
@@ -26211,8 +26074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102820cf8841c9d4aae6187057138082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialZombiesPerWave: 5
-  CurrentZombiesPerWave: 0
   SpawnDelay: 0.5
   CurrentWave: 0
   waveCooldown: 10
@@ -30460,6 +30321,12 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1775775065}
   m_Enabled: 1
+--- !u!4 &1510506935 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 216324011629605668, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3307811984655056235}
+  m_PrefabAsset: {fileID: 0}
 --- !u!205 &1510585125
 LODGroup:
   m_ObjectHideFlags: 0
@@ -33887,12 +33754,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 87.514
       objectReference: {fileID: 0}
-    - target: {fileID: 6581582659483438566, guid: 52f9f158480b12d4ab6483b3a4696c6a,
-        type: 3}
-      propertyPath: BulletPrefab
-      value: 
-      objectReference: {fileID: 8157886435198327027, guid: 459dc8d027c94ba4f981fc54e370d367,
-        type: 3}
     - target: {fileID: 7035759159349314740, guid: 52f9f158480b12d4ab6483b3a4696c6a,
         type: 3}
       propertyPath: m_Name
@@ -43435,27 +43296,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 0.31000018, z: 4}
   m_Center: {x: 2, y: -0.1450001, z: -2}
---- !u!65 &96674509971047139
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96674509973261379}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!1 &96674509973261379
 GameObject:
   m_ObjectHideFlags: 0
@@ -43467,7 +43307,6 @@ GameObject:
   - component: {fileID: 96674509973373159}
   - component: {fileID: 96674509976269851}
   - component: {fileID: 96674509975216955}
-  - component: {fileID: 96674509971047139}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (32)
   m_TagString: Wall
@@ -45002,7 +44841,6 @@ GameObject:
   - component: {fileID: 326158438983990925}
   - component: {fileID: 326158438983247623}
   - component: {fileID: 326158438982173781}
-  - component: {fileID: 326158438985912165}
   m_Layer: 0
   m_Name: Villa2_Top_Cor_A (7)
   m_TagString: Wall
@@ -45010,27 +44848,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!65 &326158438985912165
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326158438984215191}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.090011, y: 2.3000011, z: 5.0900097}
-  m_Center: {x: 2.5450037, y: 1.1500006, z: -1.454995}
 --- !u!1 &328908581486336731
 GameObject:
   m_ObjectHideFlags: 0
@@ -47687,27 +47504,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 0.31000018, z: 4}
   m_Center: {x: 2, y: -0.1450001, z: -2}
---- !u!65 &639002521107738293
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639002521109979157}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!4 &639002521109540017
 Transform:
   m_ObjectHideFlags: 0
@@ -47734,7 +47530,6 @@ GameObject:
   - component: {fileID: 639002521109540017}
   - component: {fileID: 639002521110845517}
   - component: {fileID: 639002521111891821}
-  - component: {fileID: 639002521107738293}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (44)
   m_TagString: Wall
@@ -50292,7 +50087,6 @@ GameObject:
   - component: {fileID: 1015667431730831164}
   - component: {fileID: 1015667431727426496}
   - component: {fileID: 1015667431728479456}
-  - component: {fileID: 1015667431732632888}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (49)
   m_TagString: Wall
@@ -50315,27 +50109,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 549939607426065415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1015667431732632888
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015667431730385816}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!65 &1092344865589669438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53560,7 +53333,6 @@ GameObject:
   - component: {fileID: 1439781069049590639}
   - component: {fileID: 1439781069052987283}
   - component: {fileID: 1439781069051941043}
-  - component: {fileID: 1439781069056176491}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (37)
   m_TagString: Wall
@@ -53618,27 +53390,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439781069050003403}
   m_Mesh: {fileID: 4300006, guid: 4ee3222ccf9f06f4dab2b1e8adca2ff2, type: 3}
---- !u!65 &1439781069056176491
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439781069050003403}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!65 &1444874507055269753
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54332,7 +54083,6 @@ GameObject:
   - component: {fileID: 1537835203978741582}
   - component: {fileID: 1537835203975428786}
   - component: {fileID: 1537835203976610964}
-  - component: {fileID: 1537835203980808504}
   m_Layer: 0
   m_Name: Villa2_Base_Cor_A (9)
   m_TagString: Wall
@@ -54355,27 +54105,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 549939607426065415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1537835203980808504
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537835203978564410}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5000033, y: 4.1, z: 4.5}
-  m_Center: {x: 2.2499998, y: 2.05, z: -1.75}
 --- !u!205 &1539674183990396718
 LODGroup:
   m_ObjectHideFlags: 0
@@ -59155,27 +58884,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 549939607426065415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2349461506242602238
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2349461506248747614}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!23 &2349461506246821158
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -59237,7 +58945,6 @@ GameObject:
   - component: {fileID: 2349461506249189114}
   - component: {fileID: 2349461506247873030}
   - component: {fileID: 2349461506246821158}
-  - component: {fileID: 2349461506242602238}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (33)
   m_TagString: Wall
@@ -60735,27 +60442,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 877f5e325a857fb49b1f0c31a03a9c53, type: 3}
---- !u!65 &2684638063857889685
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2684638063860105013}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!4 &2684638063859692433
 Transform:
   m_ObjectHideFlags: 0
@@ -60782,7 +60468,6 @@ GameObject:
   - component: {fileID: 2684638063859692433}
   - component: {fileID: 2684638063860991853}
   - component: {fileID: 2684638063862042701}
-  - component: {fileID: 2684638063857889685}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (50)
   m_TagString: Wall
@@ -63491,27 +63176,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8, y: 0.700001, z: 8}
   m_Center: {x: 4, y: -0.14999984, z: -4}
---- !u!65 &3183531420222062583
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183531420224270679}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!1 &3183531420224270679
 GameObject:
   m_ObjectHideFlags: 0
@@ -63523,7 +63187,6 @@ GameObject:
   - component: {fileID: 3183531420224454131}
   - component: {fileID: 3183531420227324175}
   - component: {fileID: 3183531420226281007}
-  - component: {fileID: 3183531420222062583}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (40)
   m_TagString: Wall
@@ -64090,26 +63753,6 @@ PrefabInstance:
       propertyPath: BloodScreenOverlay
       value: 
       objectReference: {fileID: 1597423159}
-    - target: {fileID: 939712591166860984, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1668225011893978949, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: fadeImage
-      value: 
-      objectReference: {fileID: 1545032363}
-    - target: {fileID: 1860411204170832449, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2656213
-      objectReference: {fileID: 0}
-    - target: {fileID: 1860411204170832449, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.08536708
-      objectReference: {fileID: 0}
     - target: {fileID: 3013418586432387829, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
         type: 3}
       propertyPath: m_Name
@@ -64120,61 +63763,21 @@ PrefabInstance:
       propertyPath: m_Data.m_Target
       value: 
       objectReference: {fileID: 1687680553}
-    - target: {fileID: 6919738354788256986, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
+    - target: {fileID: 7441551418922123473, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.195
-      objectReference: {fileID: 0}
-    - target: {fileID: 7033597766821203582, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7033597766821203582, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
+      propertyPath: fadeImage
+      value: 
+      objectReference: {fileID: 1545032363}
     - target: {fileID: 8135307253118746778, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
         type: 3}
       propertyPath: m_Data.m_Target
       value: 
       objectReference: {fileID: 297834741}
-    - target: {fileID: 8965765051399631701, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: orthographic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9083660715694713490, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 9083660715694713490, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.642
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1668225011893978949, guid: 08976ebbdc1a95e48b9dee4dc35f15a2, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 216324011629605668, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1012940201}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3013418586432387829, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 229084619}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08976ebbdc1a95e48b9dee4dc35f15a2, type: 3}
---- !u!4 &3307811984655056236 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 216324011629605668, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3307811984655056235}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &3366806487980278602
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64838,17 +64441,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ak-47
-      objectReference: {fileID: 0}
-    - target: {fileID: 1705509522487300213, guid: eab81c37117513045aa27e3b966cd2ca,
-        type: 3}
-      propertyPath: BulletPrefab
-      value: 
-      objectReference: {fileID: -2316835761503524621, guid: f96a9ba247225424ba74bd59e8db102d,
-        type: 3}
-    - target: {fileID: 4546481218847491095, guid: eab81c37117513045aa27e3b966cd2ca,
-        type: 3}
-      propertyPath: LightsModule.intensityCurve.scalar
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6070953633451872579, guid: eab81c37117513045aa27e3b966cd2ca,
         type: 3}
@@ -66486,27 +66078,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3793014062414134429}
   m_Mesh: {fileID: 4300004, guid: 1734aa20b000ddf44a644518efe5268a, type: 3}
---- !u!65 &3793576317225305883
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3793576317231745467}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!23 &3793576317229475523
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66583,7 +66154,6 @@ GameObject:
   - component: {fileID: 3793576317231301919}
   - component: {fileID: 3793576317230526947}
   - component: {fileID: 3793576317229475523}
-  - component: {fileID: 3793576317225305883}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (28)
   m_TagString: Wall
@@ -67771,27 +67341,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8, y: 0.700001, z: 8}
   m_Center: {x: 4, y: -0.14999984, z: -4}
---- !u!65 &3976983727064285251
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3976983727066260913}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.090011, y: 2.3000011, z: 5.0900097}
-  m_Center: {x: 2.5450037, y: 1.1500006, z: -1.454995}
 --- !u!1 &3976983727066260913
 GameObject:
   m_ObjectHideFlags: 0
@@ -67803,7 +67352,6 @@ GameObject:
   - component: {fileID: 3976983727066558891}
   - component: {fileID: 3976983727069390881}
   - component: {fileID: 3976983727068285811}
-  - component: {fileID: 3976983727064285251}
   m_Layer: 0
   m_Name: Villa2_Top_Cor_A (13)
   m_TagString: Wall
@@ -69515,7 +69063,6 @@ GameObject:
   - component: {fileID: 4201924649597295114}
   - component: {fileID: 4201924649593892598}
   - component: {fileID: 4201924649594943958}
-  - component: {fileID: 4201924649599162382}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (27)
   m_TagString: Wall
@@ -69538,27 +69085,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 549939607426065415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4201924649599162382
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4201924649597179566}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!64 &4232127361949624540
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -72229,27 +71755,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300006, guid: f192cad3e364e1648bd09b399d502f1b, type: 3}
---- !u!65 &4592302841903952946
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4592302841905937042}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!1 &4592302841905937042
 GameObject:
   m_ObjectHideFlags: 0
@@ -72261,7 +71766,6 @@ GameObject:
   - component: {fileID: 4592302841906279990}
   - component: {fileID: 4592302841907053258}
   - component: {fileID: 4592302841908106730}
-  - component: {fileID: 4592302841903952946}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (41)
   m_TagString: Wall
@@ -72755,27 +72259,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 549939607426065415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4744941948264850262
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4744941948267097590}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!4 &4744941948266717522
 Transform:
   m_ObjectHideFlags: 0
@@ -72802,7 +72285,6 @@ GameObject:
   - component: {fileID: 4744941948266717522}
   - component: {fileID: 4744941948270122414}
   - component: {fileID: 4744941948269068942}
-  - component: {fileID: 4744941948264850262}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (25)
   m_TagString: Wall
@@ -73386,27 +72868,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0494138, y: 12, z: 1.0494137}
   m_Center: {x: 0.0000076293945, y: 6, z: -0.00000023841858}
---- !u!65 &4837377236216199112
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4837377236218443210}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5000033, y: 4.1, z: 4.5}
-  m_Center: {x: 2.2499998, y: 2.05, z: -1.75}
 --- !u!4 &4837377236218257854
 Transform:
   m_ObjectHideFlags: 0
@@ -73433,7 +72894,6 @@ GameObject:
   - component: {fileID: 4837377236218257854}
   - component: {fileID: 4837377236219485250}
   - component: {fileID: 4837377236220387940}
-  - component: {fileID: 4837377236216199112}
   m_Layer: 0
   m_Name: Villa2_Base_Cor_A (8)
   m_TagString: Wall
@@ -73502,7 +72962,6 @@ GameObject:
   - component: {fileID: 4840656224297325180}
   - component: {fileID: 4840656224300213888}
   - component: {fileID: 4840656224299168160}
-  - component: {fileID: 4840656224303321208}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (47)
   m_TagString: Wall
@@ -73575,27 +73034,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4840656224296918744}
   m_Mesh: {fileID: 4300006, guid: 4ee3222ccf9f06f4dab2b1e8adca2ff2, type: 3}
---- !u!65 &4840656224303321208
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4840656224296918744}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!65 &4854691753127505704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -76466,7 +75904,6 @@ GameObject:
   - component: {fileID: 5395480443863168236}
   - component: {fileID: 5395480443866038288}
   - component: {fileID: 5395480443864995632}
-  - component: {fileID: 5395480443869165288}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (51)
   m_TagString: Wall
@@ -76539,27 +75976,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5395480443862726728}
   m_Mesh: {fileID: 4300006, guid: 4ee3222ccf9f06f4dab2b1e8adca2ff2, type: 3}
---- !u!65 &5395480443869165288
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5395480443862726728}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!64 &5397271311243659618
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -77483,7 +76899,6 @@ GameObject:
   - component: {fileID: 5533691953010903655}
   - component: {fileID: 5533691953009546221}
   - component: {fileID: 5533691953008521407}
-  - component: {fileID: 5533691953012915087}
   m_Layer: 0
   m_Name: Villa2_Top_Cor_A (11)
   m_TagString: Wall
@@ -77506,27 +76921,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 549939607426065415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5533691953012915087
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5533691953010679421}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.090011, y: 2.3000011, z: 5.0900097}
-  m_Center: {x: 2.5450037, y: 1.1500006, z: -1.454995}
 --- !u!64 &5547744669381538406
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -80731,7 +80125,6 @@ GameObject:
   - component: {fileID: 6015796986734366689}
   - component: {fileID: 6015796986733591325}
   - component: {fileID: 6015796986732538941}
-  - component: {fileID: 6015796986736692709}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (29)
   m_TagString: Wall
@@ -80739,48 +80132,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!65 &6015796986736692709
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6015796986734445381}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
---- !u!65 &6032543910747118397
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6032543910753032511}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5000033, y: 4.1, z: 4.5}
-  m_Center: {x: 2.2499998, y: 2.05, z: -1.75}
 --- !u!23 &6032543910751309457
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -80842,7 +80193,6 @@ GameObject:
   - component: {fileID: 6032543910753242443}
   - component: {fileID: 6032543910751989943}
   - component: {fileID: 6032543910751309457}
-  - component: {fileID: 6032543910747118397}
   m_Layer: 0
   m_Name: Villa2_Base_Cor_A (12)
   m_TagString: Wall
@@ -83790,27 +83140,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: 0dafcec3076e9e143a3b8f59b6b64d86, type: 3}
---- !u!65 &6564012543108767827
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6564012543110983411}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!4 &6564012543110570583
 Transform:
   m_ObjectHideFlags: 0
@@ -83837,7 +83166,6 @@ GameObject:
   - component: {fileID: 6564012543110570583}
   - component: {fileID: 6564012543111878315}
   - component: {fileID: 6564012543112921483}
-  - component: {fileID: 6564012543108767827}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (48)
   m_TagString: Wall
@@ -84287,7 +83615,6 @@ GameObject:
   - component: {fileID: 6613232203313424687}
   - component: {fileID: 6613232203312551123}
   - component: {fileID: 6613232203311098613}
-  - component: {fileID: 6613232203315298137}
   m_Layer: 0
   m_Name: Villa2_Base_Cor_A (6)
   m_TagString: Wall
@@ -84295,27 +83622,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!65 &6613232203315298137
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6613232203313610075}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5000033, y: 4.1, z: 4.5}
-  m_Center: {x: 2.2499998, y: 2.05, z: -1.75}
 --- !u!1 &6615437532005952817
 GameObject:
   m_ObjectHideFlags: 0
@@ -84631,27 +83937,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 6, z: 0.63507724}
   m_Center: {x: 2, y: 3, z: -0.013721466}
---- !u!65 &6656793782814498591
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6656793782816444863}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!4 &6656793782816300315
 Transform:
   m_ObjectHideFlags: 0
@@ -84678,7 +83963,6 @@ GameObject:
   - component: {fileID: 6656793782816300315}
   - component: {fileID: 6656793782819711463}
   - component: {fileID: 6656793782818668231}
-  - component: {fileID: 6656793782814498591}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (26)
   m_TagString: Wall
@@ -85368,27 +84652,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 0.31000018, z: 4}
   m_Center: {x: 2, y: -0.1450001, z: -2}
---- !u!65 &6723233178384826954
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6723233178386546760}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5000033, y: 4.1, z: 4.5}
-  m_Center: {x: 2.2499998, y: 2.05, z: -1.75}
 --- !u!1 &6723233178386546760
 GameObject:
   m_ObjectHideFlags: 0
@@ -85400,7 +84663,6 @@ GameObject:
   - component: {fileID: 6723233178386699324}
   - component: {fileID: 6723233178387605952}
   - component: {fileID: 6723233178389026790}
-  - component: {fileID: 6723233178384826954}
   m_Layer: 0
   m_Name: Villa2_Base_Cor_A (13)
   m_TagString: Wall
@@ -90054,27 +89316,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.99999547, y: 6, z: 1.0000002}
   m_Center: {x: 0.0000038146973, y: 3, z: -0.00000014901161}
---- !u!65 &7601630949879277249
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7601630949881227361}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!1 &7601630949881227361
 GameObject:
   m_ObjectHideFlags: 0
@@ -90086,7 +89327,6 @@ GameObject:
   - component: {fileID: 7601630949881668805}
   - component: {fileID: 7601630949884547129}
   - component: {fileID: 7601630949883496217}
-  - component: {fileID: 7601630949879277249}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (52)
   m_TagString: Wall
@@ -90792,27 +90032,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: c386420031e9c484182f7920f158c313, type: 3}
---- !u!65 &7721316054351950048
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7721316054353935936}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!1 &7721316054353935936
 GameObject:
   m_ObjectHideFlags: 0
@@ -90824,7 +90043,6 @@ GameObject:
   - component: {fileID: 7721316054354342628}
   - component: {fileID: 7721316054357214744}
   - component: {fileID: 7721316054356169016}
-  - component: {fileID: 7721316054351950048}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (38)
   m_TagString: Wall
@@ -96852,7 +96070,6 @@ GameObject:
   - component: {fileID: 8999318657377227670}
   - component: {fileID: 8999318657380640618}
   - component: {fileID: 8999318657379594314}
-  - component: {fileID: 8999318657383747986}
   m_Layer: 0
   m_Name: Villa2_Base_Mid_A (45)
   m_TagString: Wall
@@ -96910,27 +96127,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8999318657377312562}
   m_Mesh: {fileID: 4300006, guid: 4ee3222ccf9f06f4dab2b1e8adca2ff2, type: 3}
---- !u!65 &8999318657383747986
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8999318657377312562}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000024, y: 4, z: 0.79480267}
-  m_Center: {x: 1.9999988, y: 2, z: 0.016331732}
 --- !u!65 &9023085873520043655
 BoxCollider:
   m_ObjectHideFlags: 0

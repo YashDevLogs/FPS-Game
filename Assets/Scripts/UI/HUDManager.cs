@@ -1,7 +1,4 @@
-using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using static Weapon;
 
 
@@ -84,7 +81,7 @@ public class HUDManager
         switch(throwable)
         {
             case Throwable.ThrowableType.Grenade:
-                ServiceLocator.Instance.GlobalReference.lethalAmountUI.text = $"{ServiceLocator.Instance.WeaponManager.grenades}";
+                ServiceLocator.Instance.GlobalReference.lethalAmountUI.text = $"{ServiceLocator.Instance.WeaponManager.Grenades}";
                 ServiceLocator.Instance.GlobalReference.lethalUI.sprite = Resources.Load<GameObject>("Frag").GetComponent<SpriteRenderer>().sprite;
                 break;
         }

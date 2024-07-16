@@ -1,26 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using static Weapon;
 
 public class WeaponManager 
 {
-
-
     public GameObject activeWeaponSlot;
 
-
     [Header("Ammo")]
-    public int totalPistolAmmo = 0;
-    public int totalRifleAmmo = 0;
+    private int totalPistolAmmo = 0;
+    private int totalRifleAmmo = 0;
 
     [Header("Throwable")]
-    public int grenades = 0;
+    private int grenades = 0;
     private float throwForce = 10f;
     private float forceMultiplier = 0f;
     private float forceMultiplierLimit = 2f;
+    public int Grenades => grenades; // reference for HUD manager
 
 
     public void Initialize()
@@ -91,7 +85,7 @@ public class WeaponManager
         pickedUpWeapon.transform.localPosition = new Vector3(weapon.SpawnPosition.x, weapon.SpawnPosition.y, weapon.SpawnPosition.z);
         pickedUpWeapon.transform.localRotation = Quaternion.Euler(weapon.SpawnRotation.x, weapon.SpawnRotation.y, weapon.SpawnRotation.z);
 
-        weapon.isActiveWeapon = true;
+        weapon.IsActiveWeapon = true;
         weapon.animator.enabled = true;
     }
 
@@ -101,7 +95,7 @@ public class WeaponManager
         {
             var weaponToDrop = activeWeaponSlot.transform.GetChild(0).gameObject;
 
-            weaponToDrop.GetComponent<Weapon>().isActiveWeapon = false;
+            weaponToDrop.GetComponent<Weapon>().IsActiveWeapon = false;
             weaponToDrop.GetComponent<Weapon>().animator.enabled = false;
 
             weaponToDrop.transform.SetParent(pickedUpWeapon.transform.parent);
@@ -112,10 +106,11 @@ public class WeaponManager
 
     public void SwitchActiveSlot(int slotNumber)
     {
+        // Switching between 2 weapon slots 
         if (activeWeaponSlot.transform.childCount > 0)
         {
             Weapon currentWeapon = activeWeaponSlot.transform.GetChild(0).GetComponent<Weapon>();
-            currentWeapon.isActiveWeapon = false;
+            currentWeapon.IsActiveWeapon = false;
         }
 
         activeWeaponSlot = ServiceLocator.Instance.GlobalReference.weaponSlots[slotNumber];
@@ -123,7 +118,7 @@ public class WeaponManager
         if (activeWeaponSlot.transform.childCount > 0)
         {
             Weapon newWeapon = activeWeaponSlot.transform.GetChild(0).GetComponent<Weapon>();
-            newWeapon.isActiveWeapon = true;
+            newWeapon.IsActiveWeapon = true;
         }
     }
 
@@ -156,8 +151,6 @@ public class WeaponManager
             case Weapon.WeaponEnum.Ak47:
                 totalRifleAmmo -= bulletsToDecrease;
                 break;
-
-
         }
     }
 
@@ -193,8 +186,6 @@ public class WeaponManager
     {
         grenades += 1;
         ServiceLocator.Instance.HUDManager.UpdateThrowable(Throwable.ThrowableType.Grenade);
-
-
     }
 
     private void ThrowLethal()
@@ -204,12 +195,10 @@ public class WeaponManager
         GameObject throwable = GameObject.Instantiate(lethalPrefab, ServiceLocator.Instance.GlobalReference.throwableSpawn.transform.position, Camera.main.transform.rotation);
         Rigidbody rb = throwable.GetComponent<Rigidbody>();
         rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
-        throwable.GetComponent<Throwable>().hasBeenThrown = true;
+        throwable.GetComponent<Throwable>().HasBeenThrown = true;
         grenades -= 1;
 
         ServiceLocator.Instance.HUDManager.UpdateThrowable (Throwable.ThrowableType.Grenade);
-
     }
-
     #endregion
 }

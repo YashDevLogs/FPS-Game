@@ -1,28 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ZombieChaseState : StateMachineBehaviour
 {
 
-    Transform player;
-    NavMeshAgent agent;
+    private Transform player;
+    private NavMeshAgent agent;
 
-    public float ChaseSpeed = 6f;
+    [SerializeField] private float ChaseSpeed = 6f;
 
-    public float StopChasingDistance = 21f;
-    public float AttackDistance = 2f;
+    [SerializeField] private float StopChasingDistance = 21f;
+    [SerializeField] private float AttackDistance = 2f;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
        if(ServiceLocator.Instance.SoundManager.ZombieChannel.isPlaying == false)
         {
             ServiceLocator.Instance.SoundManager.ZombieChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.ZombieChase);
-
         }
 
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = ServiceLocator.Instance.GlobalReference.PlayerTransfrom;
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = ChaseSpeed;
     }
