@@ -18,7 +18,7 @@ public class ZombieSpawnerController : MonoBehaviour
     [SerializeField] private bool InCooldown;
     [SerializeField] private float CooldownTimer = 0f;
 
-    [SerializeField] private List<Enemy> CurrentZombiesAlive;
+    [SerializeField] private List<Enemy> CurrentZombiesAlive; // list of current alive zombies in the scene
 
     [SerializeField] private Enemy ZombiePrefab;
 
@@ -27,6 +27,8 @@ public class ZombieSpawnerController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI CurrentWaveUI;
 
     [SerializeField] private ObjectPool<Enemy> zombiePool;
+
+    List<Enemy> zombiesToRemove = new List<Enemy>(); // after zombie dies , zombies are added to the list so they can be returned to zombie pool.
 
     private void Start()
     {
@@ -63,8 +65,12 @@ public class ZombieSpawnerController : MonoBehaviour
 
     private void Update()
     {
-        List<Enemy> zombiesToRemove = new List<Enemy>();
+        ReturnDeadZombiesToPool();
+        StartWaveCooldown();
+    }
 
+    private void ReturnDeadZombiesToPool()
+    {
         foreach (Enemy zombie in CurrentZombiesAlive)
         {
             if (zombie.isDead)
@@ -80,7 +86,10 @@ public class ZombieSpawnerController : MonoBehaviour
         }
 
         zombiesToRemove.Clear();
+    }
 
+    private void StartWaveCooldown()
+    {
         if (CurrentZombiesAlive.Count == 0 && !InCooldown)
         {
             StartCoroutine(WaveCooldown());
@@ -105,6 +114,7 @@ public class ZombieSpawnerController : MonoBehaviour
         CountdownTimerUI.text = CooldownTimer.ToString("F0");
     }
 
+
     private IEnumerator WaveCooldown()
     {
         InCooldown = true;
@@ -113,7 +123,6 @@ public class ZombieSpawnerController : MonoBehaviour
 
         yield return new WaitForSeconds(waveCooldown);
 
-        // This section is moved to Update to avoid immediate next wave start.
     }
 
     private IEnumerator ReturnZombieToPoolAfterDelay(Enemy zombie, float delay)

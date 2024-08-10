@@ -5,34 +5,28 @@ using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
 {
-    private PlayerModel model;
     private PlayerController controller;
     private CharacterController characterController;
 
     public Animator CameraAnim;
-    [SerializeField] private GameObject BloodScreenOverlay;
+    [SerializeField] private GameObject bloodScreenOverlay;
+    public GameObject BloodScreenOverlay => bloodScreenOverlay;
 
     public TextMeshProUGUI HeathUI;
     [SerializeField] private GameObject GameOverUI;
 
     public Transform GroundCheck;
 
-    private float bloodScreenTimer;
-    private float bloodScreenDuration = 1.5f;
-    private bool showBloodScreenEffect;
     private bool gameOverTriggered;
 
-    private Image bloodScreenImage;
+    public Image bloodScreenImage;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
 
         characterController = GetComponent<CharacterController>();
-        model = new PlayerModel();
-        controller = new PlayerController(model, characterController, this, transform, GroundCheck);
-
-        HeathUI.text = $"Health: {model.Health}";
+        controller = new PlayerController(characterController, this, transform, GroundCheck);
 
         // Cache the Image component
         bloodScreenImage = BloodScreenOverlay.GetComponentInChildren<Image>();
@@ -40,25 +34,11 @@ public class PlayerView : MonoBehaviour
 
     void Update()
     {
-        HandleMouseMovement();
+        controller.HandleMouseMovement();
         controller.HandleMovement();
         controller.UpdatePlayerState();
-
-        UpdateBloodScreenEffect();
+        controller.UpdateBloodScreenEffect();
         CheckGameOver();
-    }
-
-    void HandleMouseMovement()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * model.MouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * model.MouseSensitivity * Time.deltaTime;
-
-        model.xRotation -= mouseY;
-        model.xRotation = Mathf.Clamp(model.xRotation, model.TopClamp, model.BottomClamp);
-
-        model.yRotation += mouseX;
-
-        transform.localRotation = Quaternion.Euler(model.xRotation, model.yRotation, 0f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,12 +46,12 @@ public class PlayerView : MonoBehaviour
         ZombieHandDamage zombieHandDamage = other.GetComponent<ZombieHandDamage>();
         if (zombieHandDamage != null)
         {
-            if (!model.isDead)
+            if (!controller.isDead)
             {
                 controller.TakeDamage(zombieHandDamage.damage);
-                StartBloodScreenEffect();
+                controller.StartBloodScreenEffect();
             }
-            else if (model.isDead && !gameOverTriggered)
+            else if (controller.isDead && !gameOverTriggered)
             {
                 gameOverTriggered = true;
                 ShowGameOverUI();
@@ -98,43 +78,10 @@ public class PlayerView : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void StartBloodScreenEffect()
-    {
-        if (!BloodScreenOverlay.activeInHierarchy)
-        {
-            BloodScreenOverlay.SetActive(true);
-        }
 
-        // Set the initial alpha value to 1 (fully visible).
-        Color startColor = bloodScreenImage.color;
-        startColor.a = 1f;
-        bloodScreenImage.color = startColor;
-
-        bloodScreenTimer = bloodScreenDuration;
-        showBloodScreenEffect = true;
-    }
-
-    private void UpdateBloodScreenEffect()
-    {
-        if (showBloodScreenEffect)
-        {
-            bloodScreenTimer -= Time.deltaTime;
-
-            float alpha = Mathf.Lerp(0f, 1f, bloodScreenTimer / bloodScreenDuration);
-            Color newColor = bloodScreenImage.color;
-            newColor.a = alpha;
-            bloodScreenImage.color = newColor;
-
-            if (bloodScreenTimer <= 0)
-            {
-                showBloodScreenEffect = false;
-                BloodScreenOverlay.SetActive(false);
-            }
-        }
-    }
     private void CheckGameOver()
     {
-        if (model.isDead && !gameOverTriggered)
+        if (controller.isDead && !gameOverTriggered)
         {
             gameOverTriggered = true;
             ShowGameOverUI();

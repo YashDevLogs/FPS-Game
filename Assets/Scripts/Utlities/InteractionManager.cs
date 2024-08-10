@@ -6,16 +6,26 @@ public class InteractionManager
     private AmmoBox hoveredAmmoBox = null;
     private Throwable hoveredThrowable = null;
 
+    // Layer mask for WeaponRender layer
+    private int weaponRenderLayerMask;
+
+    public InteractionManager()
+    {
+        // Set the layer mask to only include the WeaponRender layer
+        weaponRenderLayerMask = LayerMask.GetMask("WeaponRender");
+    }
+
     public void Update()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        // Perform the raycast with a max distance of 5 meters and only hit objects on the WeaponRender layer
+        if (Physics.Raycast(ray, out hit, 5f, weaponRenderLayerMask))
         {
             GameObject objectHitByRayCast = hit.transform.gameObject;
 
-            //Weapons
+            // Weapons
             if (objectHitByRayCast.GetComponent<Weapon>() && objectHitByRayCast.GetComponent<Weapon>().IsActiveWeapon == false)
             {
                 if (hoveredWeapon)
@@ -23,7 +33,7 @@ public class InteractionManager
                     hoveredWeapon.GetComponent<Outline>().enabled = false;
                 }
 
-                hoveredWeapon = objectHitByRayCast.gameObject.GetComponent<Weapon>();
+                hoveredWeapon = objectHitByRayCast.GetComponent<Weapon>();
                 hoveredWeapon.GetComponent<Outline>().enabled = true;
 
                 if (Input.GetKeyDown(KeyCode.F))
@@ -38,7 +48,7 @@ public class InteractionManager
                     hoveredAmmoBox.GetComponent<Outline>().enabled = false;
                 }
 
-                hoveredAmmoBox = objectHitByRayCast.gameObject.GetComponent<AmmoBox>();
+                hoveredAmmoBox = objectHitByRayCast.GetComponent<AmmoBox>();
                 hoveredAmmoBox.GetComponent<Outline>().enabled = true;
 
                 if (Input.GetKeyDown(KeyCode.F))

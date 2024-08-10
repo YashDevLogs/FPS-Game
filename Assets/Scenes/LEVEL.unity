@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.19524865, g: 0.23197317, b: 0.2672014, a: 1}
+  m_IndirectSpecularColor: {r: 0.19502886, g: 0.23188698, b: 0.2672454, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5555,6 +5555,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 789309621}
     m_Modifications:
+    - target: {fileID: 911997942378619130, guid: 86fcb64829646b44bac73af5389c65a0,
+        type: 3}
+      propertyPath: ammoData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1441f31a50e6fa1469738d3e8180067c,
+        type: 2}
     - target: {fileID: 4931621120125093977, guid: 86fcb64829646b44bac73af5389c65a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7660,7 +7666,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -7684,13 +7690,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13147922, y: -0.66030747, z: 0.052483067, w: 0.73753154}
-  m_LocalPosition: {x: 0, y: 17.43, z: -7.51}
+  m_LocalRotation: {x: 0.24344236, y: -0.6277171, z: 0.17895597, w: 0.7174133}
+  m_LocalPosition: {x: 17.25, y: 17.43, z: -7.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 15.263, y: -84.443, z: -5.724}
+  m_LocalEulerAnglesHint: {x: 35.027, y: -83.45, z: -3.42}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13259,52 +13265,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol_AmmoBox (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5435737646702141325, guid: 0637f945324eeb74493871a1cd435492,
-        type: 3}
-      propertyPath: ammoType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435737646702141325, guid: 0637f945324eeb74493871a1cd435492,
-        type: 3}
-      propertyPath: ammoAmount
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3821686114862233386, guid: 0637f945324eeb74493871a1cd435492,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 739850258}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0637f945324eeb74493871a1cd435492, type: 3}
---- !u!1 &739850257 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3821686114862233386, guid: 0637f945324eeb74493871a1cd435492,
-    type: 3}
-  m_PrefabInstance: {fileID: 739850256}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &739850258
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739850257}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5339031, y: 0.12957168, z: 0.48579836}
-  m_Center: {x: 0.21110821, y: 0.14164221, z: -0.14097166}
 --- !u!4 &739850261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 918821336799844322, guid: 0637f945324eeb74493871a1cd435492,
@@ -14239,11 +14204,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb5737f2b8948c44b25eb5f23bfaf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletImpactEffectPrefab: {fileID: 1203850111475005254, guid: 97a8cf90ebe019f44b5a2d171edb7b69,
+  bulletImpactEffectPrefab: {fileID: 1203850111475005254, guid: 97a8cf90ebe019f44b5a2d171edb7b69,
     type: 3}
   grenadeExplosionEffect: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455,
     type: 3}
-  BloodSprayEffect: {fileID: 274912588879963132, guid: 27ab3b4980b4fa048a5e9ce808b70925,
+  bloodSprayEffect: {fileID: 274912588879963132, guid: 27ab3b4980b4fa048a5e9ce808b70925,
     type: 3}
   grenadePrefab: {fileID: 8640308238885018320, guid: 13129a450c08c6c409218585a639cca8,
     type: 3}
@@ -14262,8 +14227,13 @@ MonoBehaviour:
   tacticalAmountUI: {fileID: 1216626481483641558}
   emptySlot: {fileID: 21300000, guid: 43b37fd46a033c447b21a3d7fa2a3d75, type: 3}
   middleAim: {fileID: 1506928708}
+  playerTransfrom: {fileID: 1510506935}
+  wayPoints:
+  - {fileID: 640426769}
+  - {fileID: 1539174487}
+  - {fileID: 1676761772}
+  - {fileID: 192839640}
   WaveNumber: 0
-  PlayerTransfrom: {fileID: 1510506935}
 --- !u!205 &805644192
 LODGroup:
   m_ObjectHideFlags: 0
@@ -18036,11 +18006,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8008916976680608917, guid: 86fcb64829646b44bac73af5389c65a0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1464329490}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86fcb64829646b44bac73af5389c65a0, type: 3}
 --- !u!1 &924891164
 GameObject:
@@ -21827,52 +21793,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol_AmmoBox
       objectReference: {fileID: 0}
-    - target: {fileID: 5435737646702141325, guid: 0637f945324eeb74493871a1cd435492,
-        type: 3}
-      propertyPath: ammoType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435737646702141325, guid: 0637f945324eeb74493871a1cd435492,
-        type: 3}
-      propertyPath: ammoAmount
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3821686114862233386, guid: 0637f945324eeb74493871a1cd435492,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1071661580}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0637f945324eeb74493871a1cd435492, type: 3}
---- !u!1 &1071661579 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3821686114862233386, guid: 0637f945324eeb74493871a1cd435492,
-    type: 3}
-  m_PrefabInstance: {fileID: 1071661578}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1071661580
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071661579}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5339031, y: 0.12957168, z: 0.48579836}
-  m_Center: {x: 0.21110821, y: 0.14164221, z: -0.14097166}
 --- !u!4 &1071661583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 918821336799844322, guid: 0637f945324eeb74493871a1cd435492,
@@ -23898,7 +23823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4227b4e5f895a124ea064b542918bc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootingChannel: {fileID: 1124723450}
+  ShootingChannel: {fileID: 1124723445}
   ThrowableChannel: {fileID: 1124723449}
   ZombieChannel: {fileID: 1124723446}
   ZombieChannel2: {fileID: 1124723447}
@@ -29042,33 +28967,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1464329484 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8008916976680608917, guid: 86fcb64829646b44bac73af5389c65a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 924825909}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1464329490
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464329484}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.2624077, y: 0.18191499, z: 0.35468227}
-  m_Center: {x: 0.011689708, y: 0.091099784, z: -0.0045517534}
 --- !u!4 &1464329495 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4931621120125093977, guid: 86fcb64829646b44bac73af5389c65a0,
@@ -63753,6 +63651,11 @@ PrefabInstance:
       propertyPath: BloodScreenOverlay
       value: 
       objectReference: {fileID: 1597423159}
+    - target: {fileID: 815172390409128037, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
+        type: 3}
+      propertyPath: bloodScreenOverlay
+      value: 
+      objectReference: {fileID: 1597423159}
     - target: {fileID: 3013418586432387829, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
         type: 3}
       propertyPath: m_Name
@@ -63763,6 +63666,11 @@ PrefabInstance:
       propertyPath: m_Data.m_Target
       value: 
       objectReference: {fileID: 1687680553}
+    - target: {fileID: 7025612917360288017, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7441551418922123473, guid: 08976ebbdc1a95e48b9dee4dc35f15a2,
         type: 3}
       propertyPath: fadeImage

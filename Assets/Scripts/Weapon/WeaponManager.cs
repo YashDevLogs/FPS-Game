@@ -19,12 +19,12 @@ public class WeaponManager
 
     public void Initialize()
     {
-        activeWeaponSlot = ServiceLocator.Instance.GlobalReference.weaponSlots[0];
+        activeWeaponSlot = ServiceLocator.Instance.GlobalReference.WeaponSlots[0];
     }
 
     public void Update()
     {
-        foreach(GameObject weaponSlot in ServiceLocator.Instance.GlobalReference.weaponSlots)
+        foreach(GameObject weaponSlot in ServiceLocator.Instance.GlobalReference.WeaponSlots)
         {
             if (weaponSlot == activeWeaponSlot) 
             { 
@@ -64,8 +64,6 @@ public class WeaponManager
             }
         }
     }
-
-
 
 
     #region || ----Weapon---- ||
@@ -113,7 +111,7 @@ public class WeaponManager
             currentWeapon.IsActiveWeapon = false;
         }
 
-        activeWeaponSlot = ServiceLocator.Instance.GlobalReference.weaponSlots[slotNumber];
+        activeWeaponSlot = ServiceLocator.Instance.GlobalReference.WeaponSlots[slotNumber];
 
         if (activeWeaponSlot.transform.childCount > 0)
         {
@@ -126,15 +124,16 @@ public class WeaponManager
 
 
     #region || ---- AmmoBox ---- ||
-    internal void PickUpAmmoBox(AmmoBox ammo)
+    internal void PickUpAmmoBox(AmmoBox ammoBox)
     {
+        Ammo ammo = ammoBox.AmmoData;
         switch (ammo.ammoType)
         {
-            case AmmoBox.AmmoType.PistolAmmo:
+            case Ammo.AmmoType.PistolAmmo:
                 totalPistolAmmo += ammo.ammoAmount;
                 break;
 
-            case AmmoBox.AmmoType.RifleAmmo:
+            case Ammo.AmmoType.RifleAmmo:
                 totalRifleAmmo += ammo.ammoAmount;
                 break;
         }
@@ -190,9 +189,9 @@ public class WeaponManager
 
     private void ThrowLethal()
     {
-        GameObject lethalPrefab = ServiceLocator.Instance.GlobalReference.grenadePrefab;
+        GameObject lethalPrefab = ServiceLocator.Instance.GlobalReference.GrenadePrefab;
 
-        GameObject throwable = GameObject.Instantiate(lethalPrefab, ServiceLocator.Instance.GlobalReference.throwableSpawn.transform.position, Camera.main.transform.rotation);
+        GameObject throwable = GameObject.Instantiate(lethalPrefab, ServiceLocator.Instance.GlobalReference.ThrowableSpawn.transform.position, Camera.main.transform.rotation);
         Rigidbody rb = throwable.GetComponent<Rigidbody>();
         rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
         throwable.GetComponent<Throwable>().HasBeenThrown = true;

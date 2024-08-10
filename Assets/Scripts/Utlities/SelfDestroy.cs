@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using UnityEngine;
 
@@ -16,4 +16,4 @@ public class SelfDestroy : MonoBehaviour
         Destroy(gameObject);
     }
 
-}
+}*/

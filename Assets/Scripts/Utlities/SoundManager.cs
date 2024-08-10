@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Weapon;
 
@@ -44,7 +46,6 @@ public class SoundManager: MonoBehaviour
     public AudioClip CrowScreaming;
     public AudioClip DeathMusic;
 
-
     public void PlayShootingSound(WeaponEnum weapon)
     {
         switch (weapon)
@@ -84,5 +85,4 @@ public class SoundManager: MonoBehaviour
         }
     }
 }
-
 

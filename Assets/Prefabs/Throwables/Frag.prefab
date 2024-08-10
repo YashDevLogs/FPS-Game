@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2692151967131426336}
   - component: {fileID: 2966156372857524454}
   - component: {fileID: 6117095552320735213}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Frag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   delay: 3
   damageRadius: 20
   explosionForce: 1200
-  hasBeenThrown: 0
+  HasBeenThrown: 0
   throwableType: 0
 --- !u!114 &6117095552320735213
 MonoBehaviour:

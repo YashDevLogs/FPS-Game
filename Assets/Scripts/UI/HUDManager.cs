@@ -11,35 +11,35 @@ public class HUDManager
 
         if (activeWeapon)
         {
-            ServiceLocator.Instance.GlobalReference.magzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}";
-            ServiceLocator.Instance.GlobalReference.totalAmmoUI.text = $"{ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
+            ServiceLocator.Instance.GlobalReference.MagzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}";
+            ServiceLocator.Instance.GlobalReference.TotalAmmoUI.text = $"{ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
 
             Weapon.WeaponEnum model = activeWeapon.ThisWeaponModel;
-            ServiceLocator.Instance.GlobalReference.ammoTypeUI.sprite = GetAmmoSprite(model);
+            ServiceLocator.Instance.GlobalReference.AmmoTypeUI.sprite = GetAmmoSprite(model);
 
-            ServiceLocator.Instance.GlobalReference.activeWeaponUI.sprite = GetWeaponSprite(model);
+            ServiceLocator.Instance.GlobalReference.ActiveWeaponUI.sprite = GetWeaponSprite(model);
 
             if (unActiveWeapon)
             {
-                ServiceLocator.Instance.GlobalReference.unActiceWeaponUI.sprite = GetWeaponSprite(unActiveWeapon.ThisWeaponModel);
+                ServiceLocator.Instance.GlobalReference.UnActiceWeaponUI.sprite = GetWeaponSprite(unActiveWeapon.ThisWeaponModel);
 
             }
         }
         else
         {
-            ServiceLocator.Instance.GlobalReference.magzineAmmoUI.text = "";
-            ServiceLocator.Instance.GlobalReference.totalAmmoUI.text = "";
+            ServiceLocator.Instance.GlobalReference.MagzineAmmoUI.text = "";
+            ServiceLocator.Instance.GlobalReference.TotalAmmoUI.text = "";
 
-            ServiceLocator.Instance.GlobalReference.ammoTypeUI.sprite = ServiceLocator.Instance.GlobalReference.emptySlot;
+            ServiceLocator.Instance.GlobalReference.AmmoTypeUI.sprite = ServiceLocator.Instance.GlobalReference.EmptySlot;
 
-            ServiceLocator.Instance.GlobalReference.activeWeaponUI.sprite = ServiceLocator.Instance.GlobalReference.emptySlot;
-            ServiceLocator.Instance.GlobalReference.unActiceWeaponUI.sprite= ServiceLocator.Instance.GlobalReference.emptySlot;
+            ServiceLocator.Instance.GlobalReference.ActiveWeaponUI.sprite = ServiceLocator.Instance.GlobalReference.EmptySlot;
+            ServiceLocator.Instance.GlobalReference.UnActiceWeaponUI.sprite= ServiceLocator.Instance.GlobalReference.EmptySlot;
         }
     }
 
     private GameObject GetUnActiveWeaponSlot()
     {
-        foreach (GameObject weaponSlot in ServiceLocator.Instance.GlobalReference.weaponSlots)
+        foreach (GameObject weaponSlot in ServiceLocator.Instance.GlobalReference.WeaponSlots)
         {
             if (weaponSlot != ServiceLocator.Instance.WeaponManager.activeWeaponSlot)
             {
@@ -81,8 +81,8 @@ public class HUDManager
         switch(throwable)
         {
             case Throwable.ThrowableType.Grenade:
-                ServiceLocator.Instance.GlobalReference.lethalAmountUI.text = $"{ServiceLocator.Instance.WeaponManager.Grenades}";
-                ServiceLocator.Instance.GlobalReference.lethalUI.sprite = Resources.Load<GameObject>("Frag").GetComponent<SpriteRenderer>().sprite;
+                ServiceLocator.Instance.GlobalReference.LethalAmountUI.text = $"{ServiceLocator.Instance.WeaponManager.Grenades}";
+                ServiceLocator.Instance.GlobalReference.LethalUI.sprite = Resources.Load<GameObject>("Frag").GetComponent<SpriteRenderer>().sprite;
                 break;
         }
     }

@@ -13,8 +13,6 @@ public class PlayerModel
     public bool IsGrounded { get; set; }
     public bool IsMoving { get; set; }
 
-    public bool isDead = false;
-
     public float MouseSensitivity = 100f;
     public float TopClamp = -90f;
     public float BottomClamp = 90f;

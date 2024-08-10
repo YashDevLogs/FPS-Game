@@ -10,14 +10,34 @@ public class PlayerController  :IDamageable
     private Transform groundCheck;
     private Vector3 lastPosition;
 
-    public PlayerController(PlayerModel model, CharacterController controller,PlayerView playerView, Transform playerTransform, Transform groundCheck)
+    public bool isDead = false;
+
+    private float bloodScreenTimer;
+    private float bloodScreenDuration = 1.5f;
+    private bool showBloodScreenEffect;
+
+    public PlayerController(CharacterController controller,PlayerView playerView, Transform playerTransform, Transform groundCheck)
     {
-        this.model = model;
+        model = new PlayerModel(); 
         this.controller = controller;
         this.playerView = playerView;
         this.playerTransform = playerTransform;
         this.groundCheck = groundCheck;
         lastPosition = playerTransform.position;
+        playerView.HeathUI.text = $"Health: {model.Health}";
+    }
+
+    public void HandleMouseMovement()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * model.MouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * model.MouseSensitivity * Time.deltaTime;
+
+        model.xRotation -= mouseY;
+        model.xRotation = Mathf.Clamp(model.xRotation, model.TopClamp, model.BottomClamp);
+
+        model.yRotation += mouseX;
+
+        playerView.transform.localRotation = Quaternion.Euler(model.xRotation, model.yRotation, 0f);
     }
 
     public void HandleMovement()
@@ -85,6 +105,41 @@ public class PlayerController  :IDamageable
         this.playerView.enabled = false;
         playerView.HeathUI.gameObject.SetActive(false);
         ScreenFader.Instance.StartFade();
-        model.isDead = true;
+        isDead = true;
+    }
+
+    public void StartBloodScreenEffect()
+    {
+        if (!playerView.BloodScreenOverlay.activeInHierarchy)
+        {
+            playerView.BloodScreenOverlay.SetActive(true);
+        }
+
+        // Set the initial alpha value to 1 (fully visible).
+        Color startColor = playerView.bloodScreenImage.color;
+        startColor.a = 1f;
+        playerView.bloodScreenImage.color = startColor;
+
+        bloodScreenTimer = bloodScreenDuration;
+        showBloodScreenEffect = true;
+    }
+
+    public void UpdateBloodScreenEffect()
+    {
+        if (showBloodScreenEffect)
+        {
+            bloodScreenTimer -= Time.deltaTime;
+
+            float alpha = Mathf.Lerp(0f, 1f, bloodScreenTimer / bloodScreenDuration);
+            Color newColor = playerView.bloodScreenImage.color;
+            newColor.a = alpha;
+            playerView.bloodScreenImage.color = newColor;
+
+            if (bloodScreenTimer <= 0)
+            {
+                showBloodScreenEffect = false;
+                playerView.BloodScreenOverlay.SetActive(false);
+            }
+        }
     }
 }

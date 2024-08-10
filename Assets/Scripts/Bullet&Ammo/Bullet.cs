@@ -24,10 +24,7 @@ public class Bullet : MonoBehaviour
 
     private void HandleEnemyCollision(Collision ObjectWeHit, Enemy enemy)
     {
-        if (!enemy.isDead)
-        {
-            enemy.TakeDamage(BulletDamage);
-        }
+        enemy.TakeDamage(BulletDamage);
         CreateBloodSprayEffect(ObjectWeHit);
     }
 

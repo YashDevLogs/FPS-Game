@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -51,15 +48,6 @@ public class Weapon : MonoBehaviour
     public Vector3 SpawnRotation;
 
 
-    public enum ShootingMode
-    {
-        Single,
-        Burst,
-        Auto
-    }
-
-    public ShootingMode CurrentShootingMode;
-
     private void Awake()
     {
         readyToShoot = true;
@@ -68,7 +56,6 @@ public class Weapon : MonoBehaviour
         bulletsLeft = MagzineSize;
 
         spreadIntensity = hipSpreadIntensity;
-
     }
 
 
@@ -139,7 +126,6 @@ public class Weapon : MonoBehaviour
         isADS = false;
     }
 
-
     private void FireWeapon()
     {
         bulletsLeft--;
@@ -186,7 +172,6 @@ public class Weapon : MonoBehaviour
             Invoke("FireWeapon", shootingDelay);
         }
     }
-
 
     private void Reload()
     {
@@ -244,6 +229,15 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(bulletPrefabLifespan);
         Destroy(bullet);
     }
+
+    public enum ShootingMode
+    {
+        Single,
+        Burst,
+        Auto
+    }
+
+    public ShootingMode CurrentShootingMode;
 
     public enum WeaponEnum
     {

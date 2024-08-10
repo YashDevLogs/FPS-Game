@@ -57,7 +57,7 @@ public class Throwable : MonoBehaviour
     private void GrenadeEffect()
     {
 
-        GameObject explosionEffect = ServiceLocator.Instance.GlobalReference.grenadeExplosionEffect;
+        GameObject explosionEffect = ServiceLocator.Instance.GlobalReference.GrenadeExplosionEffect;
         Instantiate(explosionEffect, transform.position, transform.rotation);
         ServiceLocator.Instance.SoundManager.ThrowableChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.GrenadeExplosion);
 
