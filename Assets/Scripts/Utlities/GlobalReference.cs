@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GlobalReference : MonoBehaviour
 {
     [Header("Private References")]
-
     [SerializeField] private GameObject bulletImpactEffectPrefab;
     [SerializeField] private GameObject grenadeExplosionEffect;
 
@@ -39,6 +38,7 @@ public class GlobalReference : MonoBehaviour
 
     [SerializeField] private Transform playerTransfrom;
     [SerializeField] private List<Transform> wayPoints;
+    [SerializeField] private GameObject bloodScreenOverlay;
 
     // Public references
     public GameObject BulletImpactEffectPrefab => bulletImpactEffectPrefab;
@@ -61,5 +61,5 @@ public class GlobalReference : MonoBehaviour
     public Transform PlayerTransfrom => playerTransfrom;
     public List<Transform> WayPoints => wayPoints;
     public int WaveNumber;
-
+    public GameObject BloodScreenOverlay => bloodScreenOverlay;
 }

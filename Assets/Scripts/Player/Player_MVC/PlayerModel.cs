@@ -9,9 +9,9 @@ public class PlayerModel
     public LayerMask GroundMask;
 
     public float Health = 100f;
-    public Vector3 Velocity { get; set; }
-    public bool IsGrounded { get; set; }
-    public bool IsMoving { get; set; }
+    public Vector3 Velocity;
+    public bool IsGrounded;
+    public bool IsMoving;
 
     public float MouseSensitivity = 100f;
     public float TopClamp = -90f;

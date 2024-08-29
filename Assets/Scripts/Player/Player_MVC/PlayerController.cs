@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Utlities;
 using UnityEngine;
 
-public class PlayerController  :IDamageable
+public class PlayerController  : IDamageable
 {
     private PlayerModel model;
     private CharacterController controller;
@@ -11,10 +11,6 @@ public class PlayerController  :IDamageable
     private Vector3 lastPosition;
 
     public bool isDead = false;
-
-    private float bloodScreenTimer;
-    private float bloodScreenDuration = 1.5f;
-    private bool showBloodScreenEffect;
 
     public PlayerController(CharacterController controller,PlayerView playerView, Transform playerTransform, Transform groundCheck)
     {
@@ -106,40 +102,5 @@ public class PlayerController  :IDamageable
         playerView.HeathUI.gameObject.SetActive(false);
         ScreenFader.Instance.StartFade();
         isDead = true;
-    }
-
-    public void StartBloodScreenEffect()
-    {
-        if (!playerView.BloodScreenOverlay.activeInHierarchy)
-        {
-            playerView.BloodScreenOverlay.SetActive(true);
-        }
-
-        // Set the initial alpha value to 1 (fully visible).
-        Color startColor = playerView.bloodScreenImage.color;
-        startColor.a = 1f;
-        playerView.bloodScreenImage.color = startColor;
-
-        bloodScreenTimer = bloodScreenDuration;
-        showBloodScreenEffect = true;
-    }
-
-    public void UpdateBloodScreenEffect()
-    {
-        if (showBloodScreenEffect)
-        {
-            bloodScreenTimer -= Time.deltaTime;
-
-            float alpha = Mathf.Lerp(0f, 1f, bloodScreenTimer / bloodScreenDuration);
-            Color newColor = playerView.bloodScreenImage.color;
-            newColor.a = alpha;
-            playerView.bloodScreenImage.color = newColor;
-
-            if (bloodScreenTimer <= 0)
-            {
-                showBloodScreenEffect = false;
-                playerView.BloodScreenOverlay.SetActive(false);
-            }
-        }
     }
 }

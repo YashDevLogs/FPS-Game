@@ -25,6 +25,7 @@ public class ServiceLocator : GenericMonoSingleton<ServiceLocator>
     private void Start()
     {
         weaponManager.Initialize();
+        hudManager.Init();
     }
 
     private void Update()

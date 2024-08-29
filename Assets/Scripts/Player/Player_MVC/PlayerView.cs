@@ -7,19 +7,14 @@ public class PlayerView : MonoBehaviour
 {
     private PlayerController controller;
     private CharacterController characterController;
+    [SerializeField] private TextMeshProUGUI healthUI;
+    [SerializeField] private Animator cameraAnim;
 
-    public Animator CameraAnim;
-    [SerializeField] private GameObject bloodScreenOverlay;
-    public GameObject BloodScreenOverlay => bloodScreenOverlay;
-
-    public TextMeshProUGUI HeathUI;
     [SerializeField] private GameObject GameOverUI;
-
-    public Transform GroundCheck;
-
+    [SerializeField] private Transform GroundCheck;
     private bool gameOverTriggered;
-
-    public Image bloodScreenImage;
+    public TextMeshProUGUI HeathUI => healthUI;
+    public Animator CameraAnim => cameraAnim;
 
     void Start()
     {
@@ -27,9 +22,6 @@ public class PlayerView : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         controller = new PlayerController(characterController, this, transform, GroundCheck);
-
-        // Cache the Image component
-        bloodScreenImage = BloodScreenOverlay.GetComponentInChildren<Image>();
     }
 
     void Update()
@@ -37,7 +29,6 @@ public class PlayerView : MonoBehaviour
         controller.HandleMouseMovement();
         controller.HandleMovement();
         controller.UpdatePlayerState();
-        controller.UpdateBloodScreenEffect();
         CheckGameOver();
     }
 
@@ -49,7 +40,7 @@ public class PlayerView : MonoBehaviour
             if (!controller.isDead)
             {
                 controller.TakeDamage(zombieHandDamage.damage);
-                controller.StartBloodScreenEffect();
+               ServiceLocator.Instance.HUDManager.StartBloodScreenEffect();
             }
             else if (controller.isDead && !gameOverTriggered)
             {
@@ -77,7 +68,6 @@ public class PlayerView : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-
 
     private void CheckGameOver()
     {
