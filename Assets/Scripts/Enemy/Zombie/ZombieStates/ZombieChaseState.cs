@@ -16,7 +16,7 @@ public class ZombieChaseState : StateMachineBehaviour
 
        if(ServiceLocator.Instance.SoundManager.ZombieChannel.isPlaying == false)
         {
-            ServiceLocator.Instance.SoundManager.ZombieChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.ZombieChase);
+            ServiceLocator.Instance.SoundManager.PlayOneShot("ZombieChase", "ZombieChannel");
         }
 
         player = ServiceLocator.Instance.GlobalReference.PlayerTransfrom;

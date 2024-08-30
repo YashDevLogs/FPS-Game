@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f586e18ccfbac7141b1aab1c5129eb8a, type: 3}
-  m_Name: AK47Reloading
+  m_Name: PlayerDead_SO
   m_EditorClassIdentifier: 
-  soundName: AK47Reloading
-  clip: {fileID: 8300000, guid: 679e092292264694eb479579fc287e5d, type: 3}
+  soundName: PlayerDead
+  clip: {fileID: 8300000, guid: ddc650b445586454e9e4f5e74d58d0ed, type: 3}
   loop: 0

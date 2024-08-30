@@ -59,7 +59,7 @@ public class Throwable : MonoBehaviour
 
         GameObject explosionEffect = ServiceLocator.Instance.GlobalReference.GrenadeExplosionEffect;
         Instantiate(explosionEffect, transform.position, transform.rotation);
-        ServiceLocator.Instance.SoundManager.ThrowableChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.GrenadeExplosion);
+        ServiceLocator.Instance.SoundManager.PlayOneShot("GrenadeExplosion", "ThrowableChannel");
 
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);

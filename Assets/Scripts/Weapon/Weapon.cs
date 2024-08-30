@@ -79,7 +79,7 @@ public class Weapon : MonoBehaviour
             GetComponent<Outline>().enabled = false;
             if (bulletsLeft == 0 && isShooting)
             {
-                ServiceLocator.Instance.SoundManager.EmptyMagzine.Play();
+                ServiceLocator.Instance.SoundManager.PlaySound("EmptyMagzine", "ShootingChannel");
             }
 
             if (CurrentShootingMode == ShootingMode.Auto)

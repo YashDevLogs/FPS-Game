@@ -84,19 +84,23 @@ public class PlayerController  : IDamageable
         {
             Debug.Log("Player died");
             PlayerDead();
-            ServiceLocator.Instance.SoundManager.SFXChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.DeathMusic);
+            ServiceLocator.Instance.SoundManager.PlayOneShot("DeathMusic", "SFXChannel");
+        }
+        else if(model.Health <= 30)
+        {
+            ServiceLocator.Instance.SoundManager.PlayOneShot("PlayerLowHealth", "PlayerChannel");
         }
         else
         {
             Debug.Log("Player hit");
             playerView.HeathUI.text = $"Health: {model.Health}";
-            ServiceLocator.Instance.SoundManager.PlayerChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.PlayerHurt);
+            ServiceLocator.Instance.SoundManager.PlayOneShot("PlayerHurt", "PlayerChannel");
         }
     }
 
     private void PlayerDead()
     {
-        ServiceLocator.Instance.SoundManager.PlayerChannel.PlayOneShot(ServiceLocator.Instance.SoundManager.PlayerDead);
+        ServiceLocator.Instance.SoundManager.PlayOneShot("PlayerDead", "PlayerChannel");
         playerView.CameraAnim.enabled = true;
         this.playerView.enabled = false;
         playerView.HeathUI.gameObject.SetActive(false);
