@@ -34,4 +34,9 @@ public class ServiceLocator : GenericMonoSingleton<ServiceLocator>
         hudManager.Update();
         interactionManager.Update();
     }
+
+    private void FixedUpdate()
+    {
+        hudManager.FixedUpdate();
+    }
 }

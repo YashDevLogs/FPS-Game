@@ -2,6 +2,6 @@ using UnityEngine;
 
 public class AmmoBox : MonoBehaviour
 {
-   [SerializeField] private Ammo ammoData;
-    public Ammo AmmoData => ammoData;
+   [SerializeField] private Ammo_SO ammoData;
+    public Ammo_SO AmmoData => ammoData;
 }

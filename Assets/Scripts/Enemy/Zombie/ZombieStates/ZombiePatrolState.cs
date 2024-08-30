@@ -39,7 +39,6 @@ public class ZombiePatrolState : StateMachineBehaviour
         agent.SetDestination(nextPosition);
     }
 
-
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if(agent.remainingDistance <= agent.stoppingDistance) 
@@ -48,7 +47,6 @@ public class ZombiePatrolState : StateMachineBehaviour
         }
 
         // transition to idle state
-
         timer = +Time.deltaTime;
         if(timer > PatrolTimer) 
         {
@@ -56,14 +54,12 @@ public class ZombiePatrolState : StateMachineBehaviour
         }
 
         // transition to chasing state
-
         float distanceFromPlayer = Vector3.Distance(player.position, animator.transform.position);
         if (distanceFromPlayer < DetectionArea)
         {
             animator.SetBool("isChasing", true);
         }
     }
-
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

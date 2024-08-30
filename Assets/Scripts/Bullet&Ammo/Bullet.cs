@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour
     private void HandleGeneralCollision(Collision ObjectWeHit)
     {
         CreateBulletImpactEffect(ObjectWeHit);
+
     }
 
     private void CreateBloodSprayEffect(Collision ObjectWeHit)

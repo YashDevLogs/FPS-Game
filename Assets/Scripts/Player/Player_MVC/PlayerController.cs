@@ -10,7 +10,8 @@ public class PlayerController  : IDamageable
     private Transform groundCheck;
     private Vector3 lastPosition;
 
-    public bool isDead = false;
+    private bool isDead = false;
+    public bool IsDead => isDead; // reference required to set Game Over in Player View.
 
     public PlayerController(CharacterController controller,PlayerView playerView, Transform playerTransform, Transform groundCheck)
     {

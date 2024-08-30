@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Weapon;
 
-
 public class HUDManager 
 {
     private Image bloodScreenImage;
@@ -22,13 +21,33 @@ public class HUDManager
     {
         UpdateBloodScreenEffect();
 
-        Weapon activeWeapon = ServiceLocator.Instance.WeaponManager.activeWeaponSlot.GetComponentInChildren<Weapon>();
-        Weapon unActiveWeapon = GetUnActiveWeaponSlot().GetComponentInChildren<Weapon>();
+    }
+
+    public void FixedUpdate()
+    {
+        GetActiveWeapon();
+    }
+
+    private GameObject GetUnActiveWeaponSlot()
+    {
+        foreach (GameObject weaponSlot in ServiceLocator.Instance.GlobalReference.WeaponSlots)
+        {
+            if (weaponSlot != ServiceLocator.Instance.WeaponManager.ActiveWeaponSlot)
+            {
+                return weaponSlot;
+            }
+        }return null;
+    }
+
+    private void GetActiveWeapon()
+    {
+        Weapon activeWeapon = ServiceLocator.Instance.WeaponManager.ActiveWeaponSlot.GetComponentInChildren<Weapon>();// highlights the active weapon player which has selected as primary 
+        Weapon unActiveWeapon = GetUnActiveWeaponSlot().GetComponentInChildren<Weapon>();// moves the unactive weapon below the active weapon
 
         if (activeWeapon)
         {
-            ServiceLocator.Instance.GlobalReference.MagzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}";
-            ServiceLocator.Instance.GlobalReference.TotalAmmoUI.text = $"{ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}";
+            ServiceLocator.Instance.GlobalReference.MagzineAmmoUI.text = $"{activeWeapon.BulletsLeft / activeWeapon.BulletsPerBurst}"; 
+            ServiceLocator.Instance.GlobalReference.TotalAmmoUI.text = $"{ServiceLocator.Instance.WeaponManager.CheckAmmoLeft(activeWeapon.ThisWeaponModel)}"; 
 
             Weapon.WeaponEnum model = activeWeapon.ThisWeaponModel;
             ServiceLocator.Instance.GlobalReference.AmmoTypeUI.sprite = GetAmmoSprite(model);
@@ -49,19 +68,8 @@ public class HUDManager
             ServiceLocator.Instance.GlobalReference.AmmoTypeUI.sprite = ServiceLocator.Instance.GlobalReference.EmptySlot;
 
             ServiceLocator.Instance.GlobalReference.ActiveWeaponUI.sprite = ServiceLocator.Instance.GlobalReference.EmptySlot;
-            ServiceLocator.Instance.GlobalReference.UnActiceWeaponUI.sprite= ServiceLocator.Instance.GlobalReference.EmptySlot;
+            ServiceLocator.Instance.GlobalReference.UnActiceWeaponUI.sprite = ServiceLocator.Instance.GlobalReference.EmptySlot;
         }
-    }
-
-    private GameObject GetUnActiveWeaponSlot()
-    {
-        foreach (GameObject weaponSlot in ServiceLocator.Instance.GlobalReference.WeaponSlots)
-        {
-            if (weaponSlot != ServiceLocator.Instance.WeaponManager.activeWeaponSlot)
-            {
-                return weaponSlot;
-            }
-        }return null;
     }
 
     private Sprite GetWeaponSprite(Weapon.WeaponEnum model)
@@ -74,7 +82,6 @@ public class HUDManager
                 return Resources.Load<GameObject>("AK47_Weapon").GetComponent<SpriteRenderer>().sprite;
             default:
                 return null;
-
         }
     }
 
@@ -88,7 +95,6 @@ public class HUDManager
                 return Resources.Load<GameObject>("Rfile_Ammo").GetComponent<SpriteRenderer>().sprite;
             default:
                 return null;
-
         }
     }
 
@@ -102,7 +108,6 @@ public class HUDManager
                 break;
         }
     }
-
 
     public void StartBloodScreenEffect()
     {

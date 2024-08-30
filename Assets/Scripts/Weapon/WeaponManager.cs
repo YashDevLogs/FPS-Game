@@ -3,7 +3,7 @@ using static Weapon;
 
 public class WeaponManager 
 {
-    public GameObject activeWeaponSlot;
+    private GameObject activeWeaponSlot; // holds the reference of currently equiped weapon
 
     [Header("Ammo")]
     private int totalPistolAmmo = 0;
@@ -15,7 +15,7 @@ public class WeaponManager
     private float forceMultiplier = 0f;
     private float forceMultiplierLimit = 2f;
     public int Grenades => grenades; // reference for HUD manager
-
+    public GameObject ActiveWeaponSlot => activeWeaponSlot;
 
     public void Initialize()
     {
@@ -126,14 +126,14 @@ public class WeaponManager
     #region || ---- AmmoBox ---- ||
     internal void PickUpAmmoBox(AmmoBox ammoBox)
     {
-        Ammo ammo = ammoBox.AmmoData;
+        Ammo_SO ammo = ammoBox.AmmoData;
         switch (ammo.ammoType)
         {
-            case Ammo.AmmoType.PistolAmmo:
+            case Ammo_SO.AmmoType.PistolAmmo:
                 totalPistolAmmo += ammo.ammoAmount;
                 break;
 
-            case Ammo.AmmoType.RifleAmmo:
+            case Ammo_SO.AmmoType.RifleAmmo:
                 totalRifleAmmo += ammo.ammoAmount;
                 break;
         }

@@ -62,7 +62,6 @@ public class ZombieSpawnerController : MonoBehaviour
             yield return new WaitForSeconds(SpawnDelay);
         }
     }
-
     private void Update()
     {
         ReturnDeadZombiesToPool();
@@ -114,7 +113,6 @@ public class ZombieSpawnerController : MonoBehaviour
         CountdownTimerUI.text = CooldownTimer.ToString("F0");
     }
 
-
     private IEnumerator WaveCooldown()
     {
         InCooldown = true;
@@ -122,7 +120,6 @@ public class ZombieSpawnerController : MonoBehaviour
         CooldownTimer = waveCooldown;
 
         yield return new WaitForSeconds(waveCooldown);
-
     }
 
     private IEnumerator ReturnZombieToPoolAfterDelay(Enemy zombie, float delay)

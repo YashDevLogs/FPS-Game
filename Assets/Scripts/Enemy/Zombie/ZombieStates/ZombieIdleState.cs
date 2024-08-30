@@ -15,7 +15,6 @@ public class ZombieIdleState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // transition to patrol state
-
         timer += Time.deltaTime;
         if (timer > IdleTime)
         {
@@ -23,12 +22,10 @@ public class ZombieIdleState : StateMachineBehaviour
         }
 
         // transition to chasing state
-
         float distanceFromPlayer = Vector3.Distance(player.position, animator.transform.position);
         if (distanceFromPlayer < DetectionAreaRadius)
         {
             animator.SetBool("isChasing", true);
         }
     }
-
 }

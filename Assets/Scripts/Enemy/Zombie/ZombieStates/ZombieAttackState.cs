@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class ZombieAttackState : StateMachineBehaviour
 {
-     private Transform player;
+    private Transform player;
     private NavMeshAgent agent;
 
     private float StopAttackingDistance = 2f;
@@ -12,7 +12,6 @@ public class ZombieAttackState : StateMachineBehaviour
         player = ServiceLocator.Instance.GlobalReference.PlayerTransfrom;
         agent = animator.GetComponent<NavMeshAgent>();
     }
-
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -48,6 +47,4 @@ public class ZombieAttackState : StateMachineBehaviour
     {
         ServiceLocator.Instance.SoundManager.ZombieChannel.Stop();
     }
-
-
 }

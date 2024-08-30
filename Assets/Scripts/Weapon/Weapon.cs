@@ -3,6 +3,22 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public enum ShootingMode
+    {
+        Single,
+        Burst,
+        Auto
+    }
+    public ShootingMode CurrentShootingMode;
+
+    public enum WeaponEnum
+    {
+        Pistol,
+        Ak47
+    }
+    public WeaponEnum ThisWeaponModel;
+
+
     [Header("Activ Weapon")]
     public bool IsActiveWeapon; // Needs to be modified in Weapon Manager if the weapon is Active or Inactive
 
@@ -229,20 +245,4 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(bulletPrefabLifespan);
         Destroy(bullet);
     }
-
-    public enum ShootingMode
-    {
-        Single,
-        Burst,
-        Auto
-    }
-
-    public ShootingMode CurrentShootingMode;
-
-    public enum WeaponEnum
-    {
-        Pistol,
-        Ak47
-    }
-    public WeaponEnum ThisWeaponModel;
 }

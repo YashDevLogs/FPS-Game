@@ -3,17 +3,13 @@ using UnityEngine.AI;
 
 public class ZombieChaseState : StateMachineBehaviour
 {
-
     private Transform player;
     private NavMeshAgent agent;
-
     [SerializeField] private float ChaseSpeed = 6f;
-
     [SerializeField] private float StopChasingDistance = 21f;
     [SerializeField] private float AttackDistance = 2f;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
        if(ServiceLocator.Instance.SoundManager.ZombieChannel.isPlaying == false)
         {
             ServiceLocator.Instance.SoundManager.PlayOneShot("ZombieChase", "ZombieChannel");
@@ -39,7 +35,6 @@ public class ZombieChaseState : StateMachineBehaviour
         }
 
         //check if agent should attack 
-
         if (DistanceFromPlayer < AttackDistance) 
         {
             animator.SetBool("isAttacking", true);

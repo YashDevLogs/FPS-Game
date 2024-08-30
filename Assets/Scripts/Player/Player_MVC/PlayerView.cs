@@ -37,12 +37,12 @@ public class PlayerView : MonoBehaviour
         ZombieHandDamage zombieHandDamage = other.GetComponent<ZombieHandDamage>();
         if (zombieHandDamage != null)
         {
-            if (!controller.isDead)
+            if (!controller.IsDead)
             {
                 controller.TakeDamage(zombieHandDamage.damage);
                ServiceLocator.Instance.HUDManager.StartBloodScreenEffect();
             }
-            else if (controller.isDead && !gameOverTriggered)
+            else if (controller.IsDead && !gameOverTriggered)
             {
                 gameOverTriggered = true;
                 ShowGameOverUI();
@@ -71,7 +71,7 @@ public class PlayerView : MonoBehaviour
 
     private void CheckGameOver()
     {
-        if (controller.isDead && !gameOverTriggered)
+        if (controller.IsDead && !gameOverTriggered)
         {
             gameOverTriggered = true;
             ShowGameOverUI();

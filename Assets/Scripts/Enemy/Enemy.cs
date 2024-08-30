@@ -45,6 +45,5 @@ public class Enemy : MonoBehaviour , IDamageable
                 ServiceLocator.Instance.SoundManager.PlayOneShot("ZombieDeath", "ZombieChannel2");
             }
         }
-    }
-       
+    }      
 }
